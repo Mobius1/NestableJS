@@ -119,7 +119,6 @@ function init() {
 
     menuOverview.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/index.html">Introduction</a></li>
                                               <li><a href="https://mobius1.github.io/NestableJS/getting-started.html">Getting Started</a></li>
-                                              <li><a href="https://mobius1.github.io/NestableJS/using-states.html">Using States</a></li>
                                               <li><a href="https://mobius1.github.io/NestableJS/options.html">Options</a></li>
                                               <li><a href="https://mobius1.github.io/NestableJS/public-methods.html">Public Methods</a></li>
                                               <li><a href="https://mobius1.github.io/NestableJS/events.html">Events</a></li>
