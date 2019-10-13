@@ -1,6 +1,4 @@
-const instance = new Nestable("#myList", {
-	animation: 250
-});
+const instance = new Nestable("#myList");
 
 DOM.select("#add_item").addEventListener("click", addItem, false);
 
