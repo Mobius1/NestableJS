@@ -1,34 +1,36 @@
 {
-    "name": "nestablejs",
-    "version": "0.0.1",
-    "description": "NestableJS is a javascript library for creating drag & drop heirarchical lists.",
-    "main": "dist/nestable.js",
-    "scripts": {
-        "test": "./node_modules/.bin/karma start --single-run --reporters=progress"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Mobius1/NestableJS.git"
-    },
-    "keywords": [
-        "nestable",
-        "drag",
-        "heirarchical",
-        "lists"
-    ],
-    "author": "Karl Saunders",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/Mobius1/NestableJS/issues"
-    },
-    "homepage": "https://github.com/Mobius1/NestableJS#readme",
-    "devDependencies": {
-        "jasmine": "^3.0.0",
-        "karma": "^2.0.0",
-        "karma-chrome-launcher": "^2.2.0",
-        "karma-coverage": "^1.1.1",
-        "karma-firefox-launcher": "^1.1.0",
-        "karma-jasmine": "^1.1.1"
-    }
-    }
-    
+  "name": "nestablejs",
+  "version": "0.0.1",
+  "description": "NestableJS is a javascript library for creating drag & drop heirarchical lists.",
+  "main": "dist/nestable.js",
+  "scripts": {
+    "test": "karma start --single-run --reporters=progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mobius1/NestableJS.git"
+  },
+  "keywords": [
+    "nestable",
+    "drag",
+    "heirarchical",
+    "lists"
+  ],
+  "author": "Karl Saunders",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mobius1/NestableJS/issues"
+  },
+  "homepage": "https://github.com/Mobius1/NestableJS#readme",
+  "devDependencies": {
+    "jasmine": "^3.0.0",
+    "karma": "^2.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-jasmine": "^1.1.1"
+  },
+  "directories": {
+    "doc": "docs"
+  }
+}
