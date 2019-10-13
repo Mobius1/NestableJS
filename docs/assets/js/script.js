@@ -126,7 +126,13 @@ function init() {
                                               <li><a href="https://mobius1.github.io/NestableJS/changelog.html">Changelog</a></li>`;
 
     menuOptions.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/api/options/threshold.html">threshold</a></li>
-                                                <li><a href="https://mobius1.github.io/NestableJS/api/options/animation.html">animation</a></li>`;
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/options/animation.html">animation</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/options/collapseButtonContent.html">collapseButtonContent</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/options/expandButtonContent.html">expandButtonContent</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/options/maxDepth.html">maxDepth</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/options/showPlaceholderOnMove.html">showPlaceholderOnMove</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/options/nodes.html">nodes</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/options/classes.html">classes</a></li>`;
 
     propsMenu.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/api/properties/config.html">config</a></li>`;
 
@@ -141,7 +147,14 @@ function init() {
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/remove.html">remove()</a></li>
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/update.html">update()</a></li>`;
 
-    menuEvents.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/api/events/init.html">init</a></li>`;
+    menuEvents.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/api/events/init.html">init</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/start.html">start</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/move.html">move</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/stop.html">stop</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/error.maxdepth.html">error.maxdepth</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/error.disabled.html">error.disabled</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/error.collapsed.html">error.collapsed</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/error.confined.html">error.confined</a></li>`;
 
     demosMenu.lastElementChild.innerHTML = ``;
 
