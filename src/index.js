@@ -1,7 +1,7 @@
 import DOM from "./utils/DOM.js";
 import Emitter from "./utils/Emitter.js";
 
-class Nestable extends Emitter {
+export default class Nestable extends Emitter {
     constructor(list, options) {
 		
         super();
