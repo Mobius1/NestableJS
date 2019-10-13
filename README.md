@@ -1,8 +1,7 @@
-# NestaJS
-  Drag & drop hierarchical list with mouse and touch compatibility.
+# NestableJS
+Drag & drop hierarchical list with mouse and touch compatibility.
 
 [![Maintenance](https://img.shields.io/maintenance/yes/2019.svg?style=?style=flat-square&logo=appveyor)](https://github.com/Mobius1/NestableJS/)
-[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/Mobius1/NestableJS.svg?style=?style=flat-square&logo=appveyor)](https://codeclimate.com/github/Mobius1/NestableJS/maintainability)
 ![](http://img.badgesize.io/Mobius1/NestableJS/master/dist/nestable.js?style=?style=flat-square&logo=appveyor) 
 ![](http://img.badgesize.io/Mobius1/NestableJS/master/dist/nestable.js?compression=gzip&label=gzipped&style=?style=flat-square&logo=appveyor)
 [![npm](https://img.shields.io/npm/dt/nestablejs.svg?style=?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/nestablejs)
