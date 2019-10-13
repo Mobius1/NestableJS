@@ -104,13 +104,13 @@
                             <div class="doc-content">
                                 <h1 class="logo-title"><i class="mdi mdi-select-drag"></i> Options</h1>
                                 
-<p>A <code>Selectable</code> instance can be initialised with a number of custom options.</p>
+<p>A <code>NestableJS</code> instance can be initialised with a number of custom options.</p>
 
 <p>Just pass an <code>Object</code> to the <code>constructor</code> with your options:</p>
 
-<pre><code class="javascript language-javascript">const selectable = new Selectable({
-   filter: ".selectable-item",
-   multiple: false,
+<pre><code class="javascript language-javascript">const instance = new Nestable({
+   threshold: 50,
+   animation: true,
    ...
 });
 </code></pre>

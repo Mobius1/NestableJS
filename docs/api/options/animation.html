@@ -14,7 +14,7 @@
         <link href="https://mobius1.github.io/Selectable/assets/css/github.min.css" rel="stylesheet">
         <link href="https://mobius1.github.io/Selectable/assets/css/prism.css" rel="stylesheet">
         <link href="https://mobius1.github.io/Selectable/assets/css/style.css" rel="stylesheet">
-        <link href="https://mobius1.github.io/Selectable/assets/css/toggle.css" rel="stylesheet">
+        <link href="https://mobius1.github.io/Selectable/assets/css/animation.css" rel="stylesheet">
         <title>NestableJS - DOCS</title>
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="https://mobius1.github.io/Selectable/assets/img/favicon.png" />
@@ -103,25 +103,25 @@
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#">API</a></li>
                                     <li class="breadcrumb-item"><a href="#">Options</a></li>
-                                    <li class="breadcrumb-item active">toggle</li>
+                                    <li class="breadcrumb-item active">animation</li>
                                 </ol>
                             </nav>
                             <!-- /.End of breadcrumb -->
                             <div class="doc-content">
-                                <h1 class="logo-title"><i class="mdi mdi-select-drag"></i> toggle</h1>
+                                <h1 class="logo-title"><i class="mdi mdi-select-drag"></i> animation</h1>
                                 <hr />
-<h5 id="typeboolean">Type: <code>Boolean|String</code></h5>
+<h5 id="typeboolean">Type: <code>Number</code></h5>
 
-<h5 id="defaultfalse">Default: <code>false</code></h5>
+<h5 id="defaultfalse">Default: <code>0</code></h5>
 
-<p>Allows toggling of the item state. </p>
+<p>Allows animation of items during movement. </p>
 
 <hr />
 
-<p>When set to true, clicking or tapping an item will toggle it's state instead of marking all currently selected items for deselection.</p>
+<p>Set to the number of milliseconds you want to transition take. When set to 0, the animation is disabled.</p>
 
-<pre><code class="javascript language-javascript">const selectable = new Selectable({
-    toggle: true
+<pre><code class="javascript language-javascript">const instance = new Nestable({
+    animation: true
 });
 </code></pre>
 
@@ -129,21 +129,28 @@
 
 <h5 id="demo" class="scroll-title">Demo</h5>
 <div id="container-demo">
-    <ul></ul>
-    <div class="form-group row">
-        <div class="col-sm-6">
-            <button class="btn btn-sm btn-danger" onclick="selectable.clear()" type="button">Clear</button>
-            <!-- <button class="btn btn-sm btn-primary" onclick="selectable.invert()" type="button">Invert</button> -->
-            <button class="btn btn-sm btn-primary" onclick="selectable.selectAll()" type="button">Select All</button>
-        </div>
-    </div>    
+    <p>
+        <ol id="myList">
+            <li class="item">Item 1</li>
+            <li class="item">Item 2
+                <ol>
+                    <li class="item">Item 3</li>
+                    <li class="item">Item 4</li>
+                </ol>
+            </li>
+            <li class="item">Item 5</li>
+            <li class="item">Item 6</li>
+            <li class="item">Item 7</li>
+            <li class="item">Item 8</li>
+        </ol>
+    </p>    
 </div>
 
                             </div>
                             <!--  /.End of documentation text content -->
                             <div class="footer-btn d-flex justify-content-between">
-                                <a href="throttle.html" class="btn"><i class="fas fa-arrow-circle-left"></i>Previous</a>
-                                <a href="tolerance.html" class="btn">Next<i class="fas fa-arrow-circle-right"></i></a>
+
+                                <a href="threshold.html" class="btn">Next<i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                             <!-- /.End of footer button -->
                         </div>
@@ -185,6 +192,6 @@
         <script type="text/javascript" src="https://mobius1.github.io/Selectable/assets/js/prism.min.js"></script>
         <script id="main-js" type="text/javascript" src="https://unpkg.com/selectable.js@0.17.3/selectable.min.js"></script>
         <script src="https://mobius1.github.io/Selectable/assets/js/script.js"></script>
-        <script src="https://mobius1.github.io/Selectable/assets/js/toggle.js"></script>
+        <script src="https://mobius1.github.io/Selectable/assets/js/animation.js"></script>
     </body>
 </html>
