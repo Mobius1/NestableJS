@@ -115,18 +115,18 @@
                                 <hr />
 
 
-<p>Selectable fires a number of custom events that the instance can listen for.</p>
+<p>Nestable fires a number of custom events that you can listen for.</p>
 
 <p>You can attach a number of custom event listeners using the <a href="api/methods/on.html"><code>on()</code></a> method and pass the event name and a callback as the first two arguments:</p>
 
 <pre><code class="javascript language-javascript">const instance = new Nestable("#myList");
 
-selectable.on('XXXX', fn);
+instance.on('XXXX', fn);
 </code></pre>
 
 <p>Event listeners can be detached by calling the <a href="api/methods/off.html"><code>off()</code></a> method with the same arguments:</p>
 
-<pre><code class="javascript language-javascript">selectable.off('XXXX', fn);
+<pre><code class="javascript language-javascript">instance.off('XXXX', fn);
 </code></pre>
 
 <hr />
@@ -137,22 +137,22 @@ selectable.on('XXXX', fn);
 
 <h3 id="incorrect">Incorrect</h3>
 
-<pre><code class="javascript language-javascript">selectable.on('end', (e, selected, unselected) =&gt; {
+<pre><code class="javascript language-javascript">instance.on('stop', () =&gt; {
     counter.innerHTML = selected.length;
 });
 </code></pre>
 
 <h3 id="correct">Correct</h3>
 
-<pre><code class="javascript language-javascript">const updateCounter = (e, selected, unselected) =&gt; {
+<pre><code class="javascript language-javascript">const updateDisplay = () =&gt; {
     counter.innerHTML = selected.length;
 };
 
 // attach the event listener
-selectable.on('end', updateCounter);
+instance.on('stop', updateDisplay);
 
 // detach the event listener
-selectable.off('end', updateCounter);
+instance.off('stop', updateDisplay);
 </code></pre>
 
 <hr />
@@ -166,51 +166,39 @@ selectable.off('end', updateCounter);
             <th>Description</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td><a href="api/events/addeditem.html"><code>addeditem</code></a></td>
-            <td>Item was added to the instance.</td>
-        </tr>
-        <tr>
-            <td><a href="api/events/removeditem.html"><code>removeditem</code></a></td>
-            <td>Item was remove from the instance.</td>
-        </tr>    
+    <tbody> 
         <tr>
             <td><a href="api/events/init.html"><code>init</code></a></td>
             <td>Instance is ready to be used.</td>
         </tr>
         <tr>
             <td><a href="api/events/start.html"><code>start</code></a></td>
-            <td><code>mousedown</code> / <code>touchstart</code>.</td>
+            <td>Fired on mouse / pointer down.</td>
+        </tr>         
+        <tr>
+            <td><a href="api/events/move.html"><code>move</code></a></td>
+            <td>Fired on mouse / pointer move.</td>
         </tr>
         <tr>
-            <td><a href="api/events/drag.html"><code>drag</code></a></td>
-            <td><code>mousemove</code> / <code>touchmove</code>.</td>
+            <td><a href="api/events/stop.html"><code>stop</code></a></td>
+            <td>Fired on mouse / pointer up.</td>
+        </tr> 
+        <tr>
+            <td><a href="api/events/error.maxdepth.html"><code>error.maxdepth</code></a></td>
+            <td>Fires when nesting is attemped when max nesting is already reached.</td>
         </tr>
         <tr>
-            <td><a href="api/events/end.html"><code>end</code></a></td>
-            <td><code>mouseup</code> / <code>touchend</code>.</td>
-        </tr>
+            <td><a href="api/events/error.disabled.html"><code>error.disabled</code></a></td>
+            <td>Fires when dropping or nesting is attemped in a disabled item.</td>
+        </tr>    
         <tr>
-            <td><a href="api/events/selecteditem.html"><code>selecteditem</code></a></td>
-            <td>Item was selected.</td>
-        </tr>
+            <td><a href="api/events/error.collapsed.html"><code>error.collapsed</code></a></td>
+            <td>Fires when dropping or nesting is attemped in a collapsed item.</td>
+        </tr>    
         <tr>
-            <td><a href="api/events/deselecteditem.html"><code>deselecteditem</code></a></td>
-            <td>Item was deselected.</td>
-        </tr>
-        <tr>
-            <td><a href="api/events/state.html"><code>state</code></a></td>  
-            <td>State change.</td>       
-        </tr>
-        <tr>
-            <td><a href="api/events/enabled.html"><code>enabled</code></a></td>  
-            <td>Instance was enabled.</td>       
-        </tr>
-        <tr>
-            <td><a href="api/events/disabled.html"><code>disabled</code></a></td>  
-            <td>Instance was disabled.</td>       
-        </tr>                  
+            <td><a href="api/events/error.confined.html"><code>error.confined</code></a></td>
+            <td>Fires when dropping of a restricted item out of it's parent or when a non-restricted item is attempted to be dropped or nesting and restricted parent.</td>
+        </tr>                                                              
     </tbody>
 </table>
 
