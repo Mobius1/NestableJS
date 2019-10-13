@@ -1,5 +1,5 @@
 
-fetch("https://api.github.com/repos/Mobius1/NestaJS/releases").then(resp => resp.json()).then(render);
+fetch("https://api.github.com/repos/Mobius1/NestableJS/releases").then(resp => resp.json()).then(render);
 
 function render(json) {
 	console.log(json[0])
@@ -29,13 +29,13 @@ function render(json) {
 			                            </a>
 			                        </li>
 			                        <li>
-			                            <a href="https://github.com/Mobius1/NestaJS/archive/${item.tag_name}.zip" rel="nofollow">
+			                            <a href="https://github.com/Mobius1/NestableJS/archive/${item.tag_name}.zip" rel="nofollow">
 			                                <svg class="octicon octicon-file-zip" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.5 1H1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V4.5L8.5 1zM11 14H1V2h3v1h1V2h3l3 3v9zM5 4V3h1v1H5zM4 4h1v1H4V4zm1 2V5h1v1H5zM4 6h1v1H4V6zm1 2V7h1v1H5zM4 9.28A2 2 0 0 0 3 11v1h4v-1a2 2 0 0 0-2-2V8H4v1.28zM6 10v1H4v-1h2z"></path></svg>
 			                                zip
 			                            </a>
 			                        </li>
 			                        <li>
-			                            <a href="https://github.com/Mobius1/NestaJS/archive/${item.tag_name}.tar.gz" rel="nofollow">
+			                            <a href="https://github.com/Mobius1/NestableJS/archive/${item.tag_name}.tar.gz" rel="nofollow">
 			                                <svg class="octicon octicon-file-zip" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.5 1H1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V4.5L8.5 1zM11 14H1V2h3v1h1V2h3l3 3v9zM5 4V3h1v1H5zM4 4h1v1H4V4zm1 2V5h1v1H5zM4 6h1v1H4V6zm1 2V7h1v1H5zM4 9.28A2 2 0 0 0 3 11v1h4v-1a2 2 0 0 0-2-2V8H4v1.28zM6 10v1H4v-1h2z"></path></svg>
 			                                tar.gz
 			                            </a>

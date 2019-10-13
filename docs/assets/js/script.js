@@ -90,7 +90,7 @@ function init() {
     demosMenu.innerHTML = `<a href="#" class="has-arrow">Demos</a><ul></ul>`;
     sidebarMenu.appendChild(demosMenu);
 
-    fetch("https://api.github.com/repos/Mobius1/NestaJS/releases").then(resp => resp.json()).then(json => {
+    fetch("https://api.github.com/repos/Mobius1/NestableJS/releases").then(resp => resp.json()).then(json => {
 
         let latest = json[0].name;
 
@@ -117,31 +117,31 @@ function init() {
     });
 
 
-    menuOverview.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestaJS/index.html">Introduction</a></li>
-                                              <li><a href="https://mobius1.github.io/NestaJS/getting-started.html">Getting Started</a></li>
-                                              <li><a href="https://mobius1.github.io/NestaJS/using-states.html">Using States</a></li>
-                                              <li><a href="https://mobius1.github.io/NestaJS/options.html">Options</a></li>
-                                              <li><a href="https://mobius1.github.io/NestaJS/public-methods.html">Public Methods</a></li>
-                                              <li><a href="https://mobius1.github.io/NestaJS/events.html">Events</a></li>
-                                              <li><a href="https://mobius1.github.io/NestaJS/changelog.html">Changelog</a></li>`;
+    menuOverview.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/index.html">Introduction</a></li>
+                                              <li><a href="https://mobius1.github.io/NestableJS/getting-started.html">Getting Started</a></li>
+                                              <li><a href="https://mobius1.github.io/NestableJS/using-states.html">Using States</a></li>
+                                              <li><a href="https://mobius1.github.io/NestableJS/options.html">Options</a></li>
+                                              <li><a href="https://mobius1.github.io/NestableJS/public-methods.html">Public Methods</a></li>
+                                              <li><a href="https://mobius1.github.io/NestableJS/events.html">Events</a></li>
+                                              <li><a href="https://mobius1.github.io/NestableJS/changelog.html">Changelog</a></li>`;
 
-    menuOptions.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestaJS/api/options/threshold.html">threshold</a></li>
-                                                <li><a href="https://mobius1.github.io/NestaJS/api/options/animation.html">animation</a></li>`;
+    menuOptions.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/api/options/threshold.html">threshold</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/options/animation.html">animation</a></li>`;
 
-    propsMenu.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestaJS/api/properties/config.html">config</a></li>`;
+    propsMenu.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/api/properties/config.html">config</a></li>`;
 
 
-    menuMethods.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestaJS/api/methods/add.html">add()</a></li>
-                                                <li><a href="https://mobius1.github.io/NestaJS/api/methods/destroy.html">destroy()</a></li>
-                                                <li><a href="https://mobius1.github.io/NestaJS/api/methods/disable.html">disable()</a></li>
-                                                <li><a href="https://mobius1.github.io/NestaJS/api/methods/enable.html">enable()</a></li>
-                                                <li><a href="https://mobius1.github.io/NestaJS/api/methods/init.html">init()</a></li>
-                                                <li><a href="https://mobius1.github.io/NestaJS/api/methods/off.html">off()</a></li>
-                                                <li><a href="https://mobius1.github.io/NestaJS/api/methods/on.html">on()</a></li>
-                                                <li><a href="https://mobius1.github.io/NestaJS/api/methods/remove.html">remove()</a></li>
-                                                <li><a href="https://mobius1.github.io/NestaJS/api/methods/update.html">update()</a></li>`;
+    menuMethods.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/api/methods/add.html">add()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/destroy.html">destroy()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/disable.html">disable()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/enable.html">enable()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/init.html">init()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/off.html">off()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/on.html">on()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/remove.html">remove()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/update.html">update()</a></li>`;
 
-    menuEvents.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestaJS/api/events/init.html">init</a></li>`;
+    menuEvents.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/api/events/init.html">init</a></li>`;
 
     demosMenu.lastElementChild.innerHTML = ``;
 
@@ -170,7 +170,7 @@ function init() {
             const link = item.querySelector("a");
             const match = link.textContent === activeBreadcrumb.textContent;
             if (match) {
-                document.head.getElementsByTagName("title")[0].textContent = `NestaJS - ${link.textContent}`;
+                document.head.getElementsByTagName("title")[0].textContent = `NestableJS - ${link.textContent}`;
 
                 items.forEach(el => {
                     el.classList.toggle("open", el.contains(link));
@@ -373,7 +373,7 @@ if ( window.Selectable && typeof Selectable === "function" ) {
 
 function initSearch() {
     const old = document.querySelector(".has-search");
-    const template = `<form class="form-group has-search" action="https://mobius1.github.io/NestaJS/search.html">
+    const template = `<form class="form-group has-search" action="https://mobius1.github.io/NestableJS/search.html">
                         <span class="ti-search form-control-feedback"></span>
                         <input type="text" class="form-control" placeholder="Search docs ..." name="q">
                      </form>`;
