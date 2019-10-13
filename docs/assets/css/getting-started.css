@@ -1,0 +1,150 @@
+.nst-list li {
+    list-style: none;
+    }
+    
+    .nst-item.nst-error > .nst-content {
+    border-color: #B71C1C;
+    background-color: #FFEBEE;
+    }
+    
+    .nst-item {
+    position: relative;
+    }
+    .nst-item .nst-button {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 8px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    left: 7px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: "Roboto";
+    }
+    .nst-item.nst-collapsed .nst-list {
+    display: none;
+    }
+    
+    .nst-error.nst-placeholder {
+    border-color: #B71C1C;
+    background-color: #FFEBEE;
+    position: relative;
+    }
+    .nst-error.nst-placeholder::after {
+    position: absolute;
+    left: 4px;
+    top: 3px;
+    color: #B71C1C;
+    font-size: 21px;
+    font-family: "Material Design Icons";
+    content: "\F5D6";
+    }
+    
+    .nst-active > .nst-content {
+    background-color: #BBDEFB;
+    }
+    
+    .nst-container {
+    position: absolute;
+    }
+    
+    .nst-content {
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    padding: 6px 12px 6px 30px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    }
+    
+    .nst-handle {
+    cursor: move;
+    }
+    
+    .remove {
+    opacity: 0.6;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    border: none;
+    }
+    
+    .nst-placeholder {
+    border: 1px dashed #999;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    background-color: #E1F5FE;
+    }
+    
+    li > ul, li > ol {
+    padding-left: 20px;
+    box-sizing: border-box;
+    }
+    
+    #output {
+    position: fixed;
+    top: 0;
+    right: 0;
+    }
+    
+    .custom-handle {
+    position: absolute;
+    padding: 7px 10px;
+    }
+    
+    #list2 .nst-item .nst-button, #nestable_2 .nst-item .nst-button {
+    right: 10px;
+    left: auto;
+    }
+    #list2 .nst-content, #nestable_2 .nst-content {
+    padding-left: 50px;
+    padding-right: 35px;
+    }
+    
+    #list3 .nst-item .nst-button::before {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    font-family: "Material Design Icons";
+    content: "\F140";
+    }
+    #list3 .nst-item.nst-collapsed .nst-button::before {
+    content: "\F142";
+    }
+    
+    .tall > .nst-content {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    }
+    
+    .nst-item.tall > .nst-button {
+    top: 22px;
+    }
+    
+    .text-faded {
+    opacity: 0.4;
+    background-color: blue;
+    color: #fff;
+    padding: 0px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    display: inline-block;
+    font-weight: bold;
+    }
