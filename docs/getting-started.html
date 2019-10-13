@@ -118,21 +118,31 @@
 
 <p><pre class="language-markup"><code>&lt;ol id="myList"&gt;
     &lt;li class="item"&gt;Item 1&lt;/li&gt;
-    &lt;li class="item"&gt;Item 2&lt;/li&gt;
-    &lt;li class="item"&gt;Item 3&lt;/li&gt;
-    &lt;li class="item"&gt;Item 4&lt;/li&gt;
+    &lt;li class="item"&gt;Item 2
+        &lt;ol&gt;
+            &lt;li class="item"&gt;Item 3&lt;/li&gt;
+            &lt;li class="item"&gt;Item 4&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/li&gt;
     &lt;li class="item"&gt;Item 5&lt;/li&gt;
     &lt;li class="item"&gt;Item 6&lt;/li&gt;
+    &lt;li class="item"&gt;Item 7&lt;/li&gt;
+    &lt;li class="item"&gt;Item 8&lt;/li&gt;
 &lt;/ol&gt;</code></pre></p>
 <p><pre class="language-js"><code>const instance = new Nestable("#myList");</code></pre></p>
 <p>
     <ol id="myList">
         <li class="item">Item 1</li>
-        <li class="item">Item 2</li>
-        <li class="item">Item 3</li>
-        <li class="item">Item 4</li>
+        <li class="item">Item 2
+            <ol>
+                <li class="item">Item 3</li>
+                <li class="item">Item 4</li>
+            </ol>
+        </li>
         <li class="item">Item 5</li>
         <li class="item">Item 6</li>
+        <li class="item">Item 7</li>
+        <li class="item">Item 8</li>
     </ol>
 </p>
                             </div>
