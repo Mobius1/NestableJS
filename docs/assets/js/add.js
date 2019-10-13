@@ -1,25 +1,37 @@
-const container = document.getElementById("container-demo");
-const ul = container.firstElementChild;
-const frag = document.createDocumentFragment();
+const instance = new Nestable("#myList", {
+	animation: 250
+});
 
+DOM.select("#add_item").addEventListener("click", addItem, false);
 
-for ( let i = 0; i < 8; i++ ) {
-	const li = document.createElement("li");
-	li.className = "ui-selectable";
-
-	if ( i > 3 ) {
-		li.className = "orphan";
+function addItem(e) {
+	
+	let max = 0;
+	
+	const items = DOM.selectAll(".item");
+	
+	for ( const item of items ) {
+		const num = parseInt(item.dataset.id, 10);
+		
+		if ( num > max ) {
+			max = num;
+		}
 	}
-
-	frag.appendChild(li);
+	
+	const li = document.createElement("li");
+	li.dataset.id = max + 1;
+	li.className = "item";
+	li.innerHTML = `Item ${max + 1}`;
+	
+	instance.add(li);
 }
 
-ul.appendChild(frag);
-
-const selectable = new Selectable({
-	appendTo: ul,
-	lasso: {
-		borderColor: "#fff",
-		backgroundColor: "rgba(255, 255, 255, 0.2)"
+function getItemById(id) {
+	const items = DOM.selectAll(".item");
+	
+	for ( const item of items ) {
+		if ( parseInt(item.dataset.id, 10) === parseInt(id, 10) ) {
+			return item;
+		}
 	}
-});
+}
