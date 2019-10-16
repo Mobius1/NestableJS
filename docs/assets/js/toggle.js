@@ -1,7 +1,7 @@
 const expand = document.getElementById("expand");
 const collapse = document.getElementById("collapse");
 
-const instance = new Nestable();
+const instance = new Nestable("#myList");
 
 expand.addEventListener("click", e => {
 	instance.expandAll();
