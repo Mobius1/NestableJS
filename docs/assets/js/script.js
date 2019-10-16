@@ -137,6 +137,9 @@ function init() {
 
 
     menuMethods.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/api/methods/add.html">add()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/bind.html">bind()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/collapseAll.html">collapseAll()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/expandAll.html">expandAll()</a></li>
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/destroy.html">destroy()</a></li>
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/disable.html">disable()</a></li>
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/enable.html">enable()</a></li>
@@ -144,6 +147,7 @@ function init() {
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/off.html">off()</a></li>
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/on.html">on()</a></li>
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/remove.html">remove()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/unbind.html">unbind()</a></li>
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/update.html">update()</a></li>`;
 
     menuEvents.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/api/events/init.html">init</a></li>
