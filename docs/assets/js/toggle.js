@@ -7,6 +7,6 @@ expand.addEventListener("click", e => {
 	instance.expandAll();
 });
 
-collpase.addEventListener("click", e => {
-	instance.collpaseAll();
+collapse.addEventListener("click", e => {
+	instance.collapseAll();
 });
