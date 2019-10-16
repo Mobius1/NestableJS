@@ -98,6 +98,32 @@
 <div class="syntax"><i><pre><code class="js language-js">Nestable.collapseAll()</code></pre></i></div>
 
 <hr />
+<h5 id="demo" class="scroll-title">Demo</h5>
+<div id="container-demo">
+    <p>
+        <ol id="myList">
+            <li class="item" data-id="1">Item 1</li>
+            <li class="item" data-id="2">Item 2
+                <ol>
+                    <li class="item" data-id="3">Item 3</li>
+                    <li class="item" data-id="4">Item 4</li>
+                </ol>
+            </li>
+            <li class="item" data-id="5">Item 5</li>
+            <li class="item" data-id="6">Item 6
+                <ol>
+                    <li class="item" data-id="7">Item 7</li>
+                </ol>
+            </li>
+            <li class="item" data-id="8">Item 8</li>
+        </ol>
+    </p>  
+    <p>
+        <button class="btn btn-sm btn-success" id="collapse" type="button">Collapse All</button>
+        <button class="btn btn-sm btn-success" id="expand" type="button">Expand All</button>
+    </p>  
+</div>
+<hr />
 
                             </div>
                             <!--  /.End of documentation text content -->

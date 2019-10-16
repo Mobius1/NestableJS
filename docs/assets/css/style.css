@@ -818,6 +818,11 @@ code {
     position: relative;
     font-size: 14px;
     color: #aaa !important;
+    overflow: hidden;
+    width: 100%;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;    
 }
 .metismenu li ul li > a:hover,
 .metismenu li ul li.active > a{
