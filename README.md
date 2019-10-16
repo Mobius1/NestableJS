@@ -14,3 +14,10 @@ Drag & drop hierarchical list with mouse and touch compatibility.
 ## Still under active development.
 
 ## [Demo](https://codepen.io/Mobius1/pen/dybwVOw) | [Documentation](https://mobius1.github.io/NestableJS) | [Changelog](https://github.com/Mobius1/NestableJS/releases)
+
+* No dependencies.
+* Written in modern ES6 javascript.
+* Lightweight - less than 5kB gzipped!
+* Touch enabled for use with mobile devices such as tablets and smartphones.
+* Customizable.
+* Fluent API.
