@@ -169,19 +169,19 @@ instance.off('stop', updateDisplay);
     <tbody> 
         <tr>
             <td><a href="api/events/init.html"><code>init</code></a></td>
-            <td>Instance is ready to be used.</td>
+            <td>Fires when the instance is ready to be used.</td>
         </tr>
         <tr>
             <td><a href="api/events/start.html"><code>start</code></a></td>
-            <td>Fired on mouse / pointer down.</td>
+            <td>Fired on mousedown / touchstart.</td>
         </tr>         
         <tr>
             <td><a href="api/events/move.html"><code>move</code></a></td>
-            <td>Fired on mouse / pointer move.</td>
+            <td>Fired on mousemove / touchmove.</td>
         </tr>
         <tr>
             <td><a href="api/events/stop.html"><code>stop</code></a></td>
-            <td>Fired on mouse / pointer up.</td>
+            <td>Fired on mouseup / touchend.</td>
         </tr> 
         <tr>
             <td><a href="api/events/error.maxdepth.html"><code>error.maxdepth</code></a></td>
@@ -193,17 +193,54 @@ instance.off('stop', updateDisplay);
         </tr>    
         <tr>
             <td><a href="api/events/error.collapsed.html"><code>error.collapsed</code></a></td>
-            <td>Fires when dropping or nesting is attemped in a collapsed item.</td>
+            <td>Fires when nesting is attemped in a collapsed item.</td>
         </tr>    
         <tr>
             <td><a href="api/events/error.confined.html"><code>error.confined</code></a></td>
-            <td>Fires when attempting to drop a restricted item out of it's parent.</td>
+            <td>Fires when attempting to move a confined item out of it's parent.</td>
         </tr>                                                              
     </tbody>
 </table>
 
 <hr />
+<h5 id="demo" class="scroll-title">Events Demo</h5>
+<div id="container-demo">
+    <p>
+        <ol id="myList" class="list">
+            <li data-id="1" class="item">Item 1</li>
+            <li data-id="2" class="item">Item 2
+                <ol>
+                    <li data-id="3" class="item">Item 3</li>
+                    <li data-id="4" class="item">Item 4
+                        <ol>
+                            <li data-id="5" class="item">Item 5</li>
+                            <li data-id="6" class="item">Item 6</li>
+                        </ol>					
+                    </li>
+                </ol>
+            </li>
+            <li data-id="7" class="item">Item 7</li>
+            <li data-id="8" class="item">Item 8</li>
+            <li data-id="9" class="item">Item 9
+                <ol>
+                    <li data-id="10" class="item">Item 10</li>
+                    <li data-id="11" class="item">Item 11</li>
+                </ol>
+            </li>
+            <li data-id="12" class="item">Item 12</li>
+        </ol>
 
+    </p>  
+    <p>
+        <h5>Events</h5>
+        <div id="events"></div>
+    </p>  
+</div>
+
+
+
+
+<hr />
 
                             </div>
                             <!--  /.End of documentation text content -->
@@ -249,7 +286,8 @@ instance.off('stop', updateDisplay);
         <script src="https://mobius1.github.io/NestableJS/assets/js/ResizeSensor.min.js"></script>
         <script src="https://mobius1.github.io/NestableJS/assets/js/theia-sticky-sidebar.min.js"></script>
         <script type="text/javascript" src="https://mobius1.github.io/NestableJS/assets/js/prism.min.js"></script>
-        <script id="main-js" type="text/javascript" src="https://unpkg.com/nestablejs@0.0.2/dist/nestable.js"></script>
+        <script id="main-js" type="text/javascript" src="https://unpkg.com/nestablejs@0.0.3/dist/nestable.js"></script>
         <script src="https://mobius1.github.io/NestableJS/assets/js/script.js"></script>
+        <script src="https://mobius1.github.io/NestableJS/assets/js/events.js"></script>
     </body>
 </html>
