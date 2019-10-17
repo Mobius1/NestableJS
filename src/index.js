@@ -476,7 +476,7 @@ export default class Nestable extends Emitter {
                     }
             }
 			
-            // console.log(DOM.parents(item, this.config.nodes.list))
+            this.emit("start", this.active);
         }
     }
 	
@@ -538,6 +538,8 @@ export default class Nestable extends Emitter {
 
                                 if ( allowNesting ) {
                                     this.active.maxDepth = false;
+                                    const oldParent = this.placeholder.closest(`.${this.config.classes.list}`);
+
                                     if ( !parentEl ) {
                                         parentEl = this._makeParent(prevEl);
                                     }
@@ -546,6 +548,8 @@ export default class Nestable extends Emitter {
                                         parent: parentEl,
                                         type: "appendChild",
                                     });
+																	
+                                    this.emit("nest", parentEl, oldParent);
 
                                     this.origin.x = e.pageX;
                                 } else {
@@ -578,7 +582,8 @@ export default class Nestable extends Emitter {
                     if ( parentEl &&
                             ((listEl.childElementCount > 1 && this.placeholder !== listEl.firstElementChild) || listEl.childElementCount < 2 && this.placeholder === listEl.firstElementChild) ) {
                         const nextEl = parentEl.nextElementSibling;
-
+                        const oldParent = this.placeholder.closest(`.${this.config.classes.list}`);
+												
                         if ( nextEl ) {
                             const list = nextEl.closest(this.config.nodes.list);
                             this._moveElement(this.placeholder, {
@@ -596,6 +601,8 @@ export default class Nestable extends Emitter {
 							
                             this.origin.x = e.pageX;
                         }
+											
+                        this.emit("unnest", parentEl, oldParent);
                     }
                 }
             } else {
@@ -624,7 +631,9 @@ export default class Nestable extends Emitter {
                                             sibling: item,
                                             animatable: item.querySelector(`.${this.config.classes.content}`)
                                         });						
-                                    }									
+                                    }
+                                    
+                                    this.emit("reorder");
                                 } else { // item is not a parent
                                     if ( this.last.dirY > 0 ) { // moving item down
                                         const nextEl = item.nextElementSibling;
@@ -651,6 +660,8 @@ export default class Nestable extends Emitter {
                                             animatable: item.querySelector(`.${this.config.classes.content}`)
                                         });								
                                     }
+
+                                    this.emit("reorder");
                                 }
                             }
                         }
@@ -677,6 +688,8 @@ export default class Nestable extends Emitter {
             this.container.style.transform = `translate3d(${e.pageX - this.origin.original.x}px, ${e.pageY - this.origin.original.y}px, 0)`;
 			
             this.lastParent = this.placeholder.parentNode;
+
+            this.emit("move", this.active);
         }
 		
         this.last = {
@@ -756,7 +769,7 @@ export default class Nestable extends Emitter {
         // css.zIndex = 10000;
 
         // Trigger a repaint so the next bit works
-        el.offsetHeight;
+        const oh = el.offsetHeight;
 
         // Reset the transform, but add a transition so it's smooth
         css.transform = `translate3d(0px, 0px, 0px)`;
