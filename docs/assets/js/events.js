@@ -73,11 +73,11 @@ function fireEvent(event) {
 	evNodes[event].classList.add("active");
 	
 	if ( event.includes("error") ) {
-		evNodes[event].classList.add("error");
+		evNodes[event].classList.add("event-error");
 	}
 	
 	setTimeout(() => {
-		evNodes[event].classList.remove("error");
+		evNodes[event].classList.remove("event-error");
 		evNodes[event].classList.remove("active");
 	}, 300);
 }

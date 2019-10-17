@@ -22,7 +22,7 @@
     color: #fff;
     transition: all 0ms ease 0ms;
 }
-#events .event.error {
+#events .event.event-error {
     background-color: #E53935;
     color: #fff;
     transition: all 0ms ease 0ms;
