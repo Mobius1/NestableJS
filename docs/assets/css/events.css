@@ -1,5 +1,5 @@
-#container-demo {
-    width: 400px;
+#myList {
+    width: 500px;
 }
 #events {
     display: flex;
@@ -10,7 +10,7 @@
     padding: 6px 12px;
     margin: 0 5px 5px 0;
     display: flex;
-    width: 25%;
+    width: 200px;
     transition: all 500ms ease 0ms;
     display: flex;
     align-items: center;
