@@ -33,12 +33,17 @@ export default class Nestable extends Emitter {
                 error: "nst-error",
                 moving: "nst-moving",
             },
-			
-            onInit: () => {},
-            onChange: () => {},
         };
 		
         this.config = Object.assign({}, this.defaultConfig, options);
+			
+        if ( options.nodes ) {
+            this.config.nodes = Object.assign({}, this.defaultConfig.nodes, options.nodes);
+        }			
+			
+        if ( options.classes ) {
+            this.config.classes = Object.assign({}, this.defaultConfig.classes, options.classes);
+        }        
 		
         this.parent = typeof list === "string" ? DOM.select(list) : list;
 
