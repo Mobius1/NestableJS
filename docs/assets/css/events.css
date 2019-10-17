@@ -1,0 +1,29 @@
+#container-demo {
+    width: 400px;
+}
+#events {
+    display: flex;
+    flex-wrap: wrap;
+}
+#events .event {
+    background-color: #eee;
+    padding: 6px 12px;
+    margin: 0 5px 5px 0;
+    display: flex;
+    width: 25%;
+    transition: all 500ms ease 0ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto Mono";
+}
+#events .event.active {
+    background-color: #28a745;
+    color: #fff;
+    transition: all 0ms ease 0ms;
+}
+#events .event.error {
+    background-color: #E53935;
+    color: #fff;
+    transition: all 0ms ease 0ms;
+}
