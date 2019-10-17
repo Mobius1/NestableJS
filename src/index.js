@@ -519,7 +519,7 @@ export default class Nestable extends Emitter {
 						
                         if ( prevEl.classList.contains(this.config.classes.collapsed) ) {
                             if ( !this.active.collapsedParent ) {
-                                this.emit("move.collapsed", this.active.node, prevEl);
+                                this.emit("error.collapsed", this.active.node, prevEl);
 
                                 this.active.collapsedParent = true;
                             }
@@ -545,14 +545,14 @@ export default class Nestable extends Emitter {
                                     this.origin.x = e.pageX;
                                 } else {
                                     if ( !this.active.maxDepth ) {
-                                        this.emit("move.maxdepth", this.active.node, this.config.maxDepth);
+                                        this.emit("error.maxdepth", this.active.node, this.config.maxDepth);
 
                                         this.active.maxDepth = true;
                                     }
                                 }
                             } else {
                                 if ( !this.active.disabledParent ) {
-                                    this.emit("move.disabled");
+                                    this.emit("error.disabled");
 
                                     this.active.disabledParent = true;
                                 }
@@ -694,7 +694,7 @@ export default class Nestable extends Emitter {
             if ( !DOM.parents(type.parent, `#${this.active.parent.id}`).includes(this.active.parent) ) {
                 if ( !this.active.confinedParent ) {
 					
-                    this.emit("move.confined", el, this.active.parent, type.parent);
+                    this.emit("error.confined", el, this.active.parent, type.parent);
                     this.active.confinedParent  = true;
                 }
 				
