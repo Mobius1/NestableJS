@@ -1,7 +1,17 @@
+/*!
+*
+* NestableJS
+* Copyright (c) 2019 Karl Saunders
+* Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
+* and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+*
+* Version: 0.0.5
+*
+*/
 var $jscomp=$jscomp||{};$jscomp.scope={};$jscomp.arrayIteratorImpl=function(a){var b=0;return function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}}};$jscomp.arrayIterator=function(a){return{next:$jscomp.arrayIteratorImpl(a)}};$jscomp.makeIterator=function(a){var b="undefined"!=typeof Symbol&&Symbol.iterator&&a[Symbol.iterator];return b?b.call(a):$jscomp.arrayIterator(a)};
 var DOM={select:function(a,b){b=void 0===b?document:b;return b.querySelector(a)},selectAll:function(a,b){b=void 0===b?document:b;return b.querySelectorAll(a)},children:function(a,b){for(var c=[],d=a.children,e=d.length,f=0;f<e;++f){var k=d[f];k.matches(b)&&c.push(k)}return c},parents:function(a,b){for(var c=[];a&&a!==document;a=a.parentNode)b?a.matches(b)&&c.push(a):c.push(a);return c},rect:function(a){var b=window,c=void 0!==b.pageYOffset?b.pageYOffset:(document.documentElement||document.body.parentNode||
 document.body).scrollTop;a=a.getBoundingClientRect();return{left:a.left+b.pageXOffset,top:a.top+c,height:a.height,width:a.width}}},Nestable=function(a,b){this.defaultConfig={threshold:40,animation:0,collapseButtonContent:"\u2013",expandButtonContent:"+",includeContent:!1,maxDepth:3,showPlaceholderOnMove:!1,nodes:{list:"ol",item:"li"},classes:{list:"nst-list",item:"nst-item",content:"nst-content",parent:"nst-parent",dragging:"nst-dragging",handle:"nst-handle",placeholder:"nst-placeholder",container:"nst-container",
-button:"nst-button",collapsed:"nst-collapsed",disabled:"nst-disabled",error:"nst-error",moving:"nst-moving"}};this.config=Object.assign({},this.defaultConfig,b);b.nodes&&(this.config.nodes=Object.assign({},this.defaultConfig.nodes,b.nodes));b.classes&&(this.config.classes=Object.assign({},this.defaultConfig.classes,b.classes));this.parent="string"===typeof a?DOM.select(a):a;if(!this.parent)return console.error("Node ("+a+") not found.");if(this.parent._nestable)return console.error("There is already a Nestable instance active on this node.");
+button:"nst-button",collapsed:"nst-collapsed",disabled:"nst-disabled",error:"nst-error",moving:"nst-moving"}};this.config=Object.assign({},this.defaultConfig,b);b&&(b.nodes&&(this.config.nodes=Object.assign({},this.defaultConfig.nodes,b.nodes)),b.classes&&(this.config.classes=Object.assign({},this.defaultConfig.classes,b.classes)));this.parent="string"===typeof a?DOM.select(a):a;if(!this.parent)return console.error("Node ("+a+") not found.");if(this.parent._nestable)return console.error("There is already a Nestable instance active on this node.");
 this.initialised=!1;this.disabled=!0;this.last={x:0,y:0};this.init()};
 Nestable.prototype.init=function(a){var b=this;if(!this.initialised){this.touch="ontouchstart"in window||window.DocumentTouch&&document instanceof DocumentTouch;a&&(this.config=Object.assign({},this.defaultConfig,a));this.dragDepth=0;this.parent.classList.add(this.config.classes.list);this.parent.classList.add(this.config.classes.parent);a=DOM.children(this.parent,this.config.nodes.item);a=$jscomp.makeIterator(a);for(var c=a.next();!c.done;c=a.next())this._nest(c.value);this.placeholder=document.createElement(this.config.nodes.item);
 this.placeholder.classList.add(this.config.classes.placeholder);this._getData();this.parent._nestable=this;window._nestableInstances?(window._nestableInstances+=1,this.id=window._nestableInstances):this.id=window._nestableInstances=1;this.enable();this._getData();setTimeout(function(){b.emit("init")},10);this.initialised=!0}};

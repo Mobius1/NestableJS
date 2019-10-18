@@ -37,13 +37,15 @@ export default class Nestable extends Emitter {
 		
         this.config = Object.assign({}, this.defaultConfig, options);
 			
-        if ( options.nodes ) {
-            this.config.nodes = Object.assign({}, this.defaultConfig.nodes, options.nodes);
-        }			
-			
-        if ( options.classes ) {
-            this.config.classes = Object.assign({}, this.defaultConfig.classes, options.classes);
-        }        
+        if ( options ) {
+            if ( options.nodes ) {
+                    this.config.nodes = Object.assign({}, this.defaultConfig.nodes, options.nodes);
+            }			
+
+            if ( options.classes ) {
+                    this.config.classes = Object.assign({}, this.defaultConfig.classes, options.classes);
+            }
+        }       
 		
         this.parent = typeof list === "string" ? DOM.select(list) : list;
 
