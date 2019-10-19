@@ -771,7 +771,7 @@ export default class Nestable extends Emitter {
         // css.zIndex = 10000;
 
         // Trigger a repaint so the next bit works
-        const oh = el.offsetHeight;
+        this._repaint(el);
 
         // Reset the transform, but add a transition so it's smooth
         css.transform = `translate3d(0px, 0px, 0px)`;
@@ -784,7 +784,11 @@ export default class Nestable extends Emitter {
             css.transform = "";
             css.transition = "";
         }, this.config.animation);		
-    }	
+    }
+
+    _repaint(el) {
+        return el.offsetHeight;
+    }
 	
     _onMouseUp(e) {
         if ( this.active ) {
