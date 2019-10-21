@@ -3,9 +3,9 @@ import Emitter from "./utils/Emitter.js";
 
 export default class Nestable extends Emitter {
     constructor(list, options) {
-		
+
         super();
-		
+
         this.defaultConfig = {
             threshold: 40,
             animation: 0,
@@ -34,55 +34,58 @@ export default class Nestable extends Emitter {
                 moving: "nst-moving",
             },
         };
-		
-        this.config = Object.assign({}, this.defaultConfig, options);
-			
-        if ( options ) {
-            if ( options.nodes ) {
-                    this.config.nodes = Object.assign({}, this.defaultConfig.nodes, options.nodes);
-            }			
 
-            if ( options.classes ) {
-                    this.config.classes = Object.assign({}, this.defaultConfig.classes, options.classes);
+        this.config = Object.assign({}, this.defaultConfig, options);
+
+        if (options) {
+            if (options.nodes) {
+                this.config.nodes = Object.assign({}, this.defaultConfig.nodes, options.nodes);
             }
-        }       
-		
+
+            if (options.classes) {
+                this.config.classes = Object.assign({}, this.defaultConfig.classes, options.classes);
+            }
+        }
+
         this.parent = typeof list === "string" ? DOM.select(list) : list;
 
-        if ( !this.parent ) {
+        if (!this.parent) {
             return console.error(`Node (${list}) not found.`);
-        }			
+        }
 
-        if ( this.parent._nestable ) {
+        if (this.parent._nestable) {
             return console.error("There is already a Nestable instance active on this node.");
-        }		
-		
+        }
+
         this.initialised = false;
         this.disabled = true;
-        this.last = { x: 0, y: 0 };
-		
+        this.last = {
+            x: 0,
+            y: 0
+        };
+
         this.init();
     }
-	
+
     init(options) {
-        if ( !this.initialised ) {
-			
+        if (!this.initialised) {
+
             this.touch =
-            "ontouchstart" in window ||
-            (window.DocumentTouch && document instanceof DocumentTouch);
-			
-            if ( options ) {
+                "ontouchstart" in window ||
+                (window.DocumentTouch && document instanceof DocumentTouch);
+
+            if (options) {
                 this.config = Object.assign({}, this.defaultConfig, options);
             }
-		
-            this.dragDepth = 0;			
-			
+
+            this.dragDepth = 0;
+
             this.parent.classList.add(this.config.classes.list);
             this.parent.classList.add(this.config.classes.parent);
 
 
             const items = DOM.children(this.parent, this.config.nodes.item);
-            for ( const item of items ) {
+            for (const item of items) {
                 this._nest(item);
             }
 
@@ -93,7 +96,7 @@ export default class Nestable extends Emitter {
 
             this.parent._nestable = this;
 
-            if ( !window._nestableInstances ) {
+            if (!window._nestableInstances) {
                 window._nestableInstances = 1;
 
                 this.id = 1;
@@ -104,84 +107,84 @@ export default class Nestable extends Emitter {
             }
 
             this.enable();
-			
+
             this._getData();
-			
+
             setTimeout(() => {
                 this.emit("init");
             }, 10);
-			
+
             this.initialised = true;
         }
     }
-	
+
     destroy() {
-		
-        if ( this.initialised ) {
-			
+
+        if (this.initialised) {
+
             this.initialised = false;
-		
+
             this.disable();
 
             this.parent.classList.remove(this.config.classes.list);
             this.parent.classList.remove(this.config.classes.parent);
-			
+
             delete(this.parent._nestable);
 
-            if ( window._nestableInstances ) {
+            if (window._nestableInstances) {
                 window._nestableInstances -= 1;
             }
-			
+
             const destroyItem = (item) => {
                 item.classList.remove(this.config.classes.item);
                 item.classList.remove(this.config.classes.collapsed);
-				
+
                 const listEl = item.querySelector(this.config.nodes.list);
                 const contentEl = item.querySelector(`.${this.config.classes.content}`);
                 const handleEl = item.querySelector(`.${this.config.classes.handle}`);
                 const buttonEl = item.querySelector(`.${this.config.classes.button}`);
-				
+
                 // default handle is also the content container
                 const defaultHandle = contentEl.classList.contains(this.config.classes.handle);
-				
+
                 const div = document.createDocumentFragment();
 
                 for (var i = contentEl.childNodes.length - 1; i >= 0; i--) {
                     div.insertBefore(contentEl.childNodes[i], div.firstChild);
                 }
-				
-                item.insertBefore(div, contentEl)	
+
+                item.insertBefore(div, contentEl)
                 item.removeChild(contentEl);
 
-                if ( listEl ) {
+                if (listEl) {
                     listEl.classList.remove(this.config.classes.list);
                     item.removeChild(buttonEl);
-					
+
                     const items = DOM.children(listEl, this.config.nodes.item);
 
-                    for ( const item of items ) {
+                    for (const item of items) {
                         destroyItem(item);
                     }
                 }
             };
-			
+
             const items = DOM.children(this.parent, this.config.nodes.item);
-			
-            for ( const item of items ) {
+
+            for (const item of items) {
                 destroyItem(item);
             }
-			
+
             this.emit("destroy", this.parent);
         }
-    }	
-	
+    }
+
     bind() {
         this.events = {
             start: this._onMouseDown.bind(this),
             move: this._onMouseMove.bind(this),
             end: this._onMouseUp.bind(this),
         };
-		
+
         if (this.touch) {
             this.parent.addEventListener("touchstart", this.events.start, false);
             document.addEventListener("touchmove", this.events.move, false);
@@ -193,124 +196,124 @@ export default class Nestable extends Emitter {
             document.addEventListener("mouseup", this.events.end, false);
         }
     }
-	
+
     unbind() {
         this.parent.removeEventListener("mousedown", this.events.start);
         document.removeEventListener("mousemove", this.events.move);
         document.removeEventListener("mouseup", this.events.end);
     }
-	
+
     enable() {
-        if ( this.disabled ) {
+        if (this.disabled) {
             this.bind();
-			
+
             this.parent.classList.remove(this.config.classes.disabled);
-			
+
             this.disabled = false;
         }
     }
-	
+
     disable() {
-        if ( !this.disabled ) {
+        if (!this.disabled) {
             this.unbind();
-			
+
             this.parent.classList.add(this.config.classes.disabled);
-			
+
             this.disabled = true;
         }
     }
-	
+
     serialise() {
         this.serialize();
     }
-	
+
     serialize() {
         return this._getData("data");
-    }	
-	
+    }
+
     collapseAll() {
         const items = DOM.selectAll(`.${this.config.classes.item}`, this.parent);
-        for ( const item of items ) {
-            if ( !item.classList.contains(this.config.classes.collapsed) ) {
+        for (const item of items) {
+            if (!item.classList.contains(this.config.classes.collapsed)) {
                 const btn = item.querySelector(`.${this.config.classes.button}`);
-				
-                if ( btn ) {
+
+                if (btn) {
                     this._collapseList(item, btn);
                 }
             }
         }
     }
-	
+
     expandAll() {
         const items = DOM.selectAll(`.${this.config.classes.item}`, this.parent);
-        for ( const item of items ) {
-            if ( item.classList.contains(this.config.classes.collapsed) ) {
+        for (const item of items) {
+            if (item.classList.contains(this.config.classes.collapsed)) {
                 const btn = item.querySelector(`.${this.config.classes.button}`);
-				
-                if ( btn ) {
+
+                if (btn) {
                     this._expandList(item, btn);
                 }
             }
         }
     }
-	
+
     add(element, parent) {
-		
-        if ( !parent ) {
+
+        if (!parent) {
             parent = this.parent;
         }
-		
+
         this._nest(element);
-		
-        if ( parent !== this.parent ) {
+
+        if (parent !== this.parent) {
             const listEl = DOM.select(this.config.nodes.list, parent);
-			
-            if ( !listEl ) {
+
+            if (!listEl) {
                 parent = this._makeParent(parent);
             } else {
                 parent = listEl;
             }
         }
-		
+
         parent.appendChild(element);
-		
+
         this.update();
     }
-	
+
     remove(element, removeChildElements = true) {
-		
+
         const parentEl = element.closest(this.config.nodes.list);
-		
-        if ( !removeChildElements ) {
+
+        if (!removeChildElements) {
             const childList = element.querySelector(`.${this.config.classes.list}`);
 
-            if ( childList ) {
-				
+            if (childList) {
+
                 const childElements = DOM.children(childList, this.config.nodes.item);
-				
-                if ( childElements.length ) {
+
+                if (childElements.length) {
                     const frag = document.createDocumentFragment();
 
                     for (var i = childElements.length - 1; i >= 0; i--) {
                         const childElement = childElements[i];
-                        frag.insertBefore(childElement, frag.firstElementChild);		
-                    }	
+                        frag.insertBefore(childElement, frag.firstElementChild);
+                    }
                     parentEl.replaceChild(frag, element);
                 }
             }
         } else {
             parentEl.removeChild(element);
         }
-		
+
         this.update();
     }
-	
+
     update() {
         this._getData("nodes");
-		
+
         this.emit("update");
     }
-	
+
     _nest(el) {
         const handle = el.querySelector(`.${this.config.classes.handle}`);
 
@@ -319,108 +322,117 @@ export default class Nestable extends Emitter {
 
         const nodes = el.childNodes;
 
-        if ( !handle ) {
+        if (!handle) {
             content.classList.add(this.config.classes.handle);
 
             for (var i = nodes.length - 1; i >= 0; i--) {
                 const node = nodes[i];
-                if ( node.nodeName.toLowerCase() !== this.config.nodes.list ) {
+                if (node.nodeName.toLowerCase() !== this.config.nodes.list) {
                     content.insertBefore(node, content.firstChild);
                 }
-            }				
+            }
         } else {
             for (var i = nodes.length - 1; i >= 0; i--) {
                 const node = nodes[i];
-                if ( node !== handle && node.nodeName.toLowerCase() !== this.config.nodes.list ) {
+                if (node !== handle && node.nodeName.toLowerCase() !== this.config.nodes.list) {
                     content.insertBefore(node, content.firstChild);
                 }
-            }	
+            }
         }
 
         el.classList.add(this.config.classes.item);
 
         const list = el.querySelector(this.config.nodes.list);
 
-        if ( list ) {
+        if (list) {
             el.insertBefore(content, list);
             const parent = this._makeParent(el);
             const items = DOM.children(parent, this.config.nodes.item);
 
-            if ( el.classList.contains(this.config.classes.collapsed) ) {
+            if (el.classList.contains(this.config.classes.collapsed)) {
                 this._collapseList(el);
             }
 
-            for ( const i of items ) {
+            for (const i of items) {
                 this._nest(i);
             }
         } else {
             el.appendChild(content);
-        }		
+        }
     }
-	
+
     _isDisabled(item) {
-        let disabled = false;
-		
-        if ( item.classList.contains(this.config.classes.disabled) ) {
-            disabled = true;
+        // item has the [data-nestable-disabled] attribute
+        if ("nestableDisabled" in item.dataset) {
+            if (!item.dataset.nestableDisabled.length || item.dataset.nestableDisabled !== "false") {
+                return true;
+            }
         }
-		
+
+        if (item.classList.contains(this.config.classes.disabled)) {
+            return true;
+        }
+
         const listEls = DOM.parents(item, `.${this.config.classes.disabled}`);
-		
-        if ( listEls.length ) {
-            disabled = true;
+
+        if (listEls.length) {
+            return true;
         }
-		
-        return disabled;
+
+        return false;
     }
-	
+
     /**
     * Get event
     * @return {Object}
     */
     _getEvent(e) {
-            if (this.touch) {
-                    if (e.type === "touchend") {
-                            return e.changedTouches[0];
-                    }
-                    return e.touches[0];
+        if (this.touch) {
+            if (e.type === "touchend") {
+                return e.changedTouches[0];
             }
-            return e;
-    }	
-	
+            return e.touches[0];
+        }
+        return e;
+    }
+
     _onMouseDown(e) {
 
         const evt = this._getEvent(e);
-		
+
         const button = e.target.closest(`.${this.config.classes.button}`);
         const item = e.target.closest(`.${this.config.classes.item}`);
-		
-        if ( button ) {
+
+        if (button) {
             return this._toggleList(item, button);
         }
-		
+
         const handle = e.target.closest(`.${this.config.classes.handle}`);
-		
-        if ( !handle ) {
+
+        if (!handle) {
             return false;
         }
-		
-        if ( item ) {
-            if ( this._isDisabled(item) ) {
+
+        if (item) {
+            if (this._isDisabled(item)) {
                 return false;
             }
-			
+
             e.preventDefault();
-			
+
             this.parent.classList.add(this.config.classes.moving);
 
             item.classList.add(this.config.classes.dragging);
-			
+
             const rect = DOM.rect(item);
-			
+
             this.origin = {
-                x: evt.pageX, y: evt.pageY,
-                original: { x: evt.pageX, y: evt.pageY, }
+                x: evt.pageX,
+                y: evt.pageY,
+                original: {
+                    x: evt.pageX,
+                    y: evt.pageY,
+                }
             };
 
             this.active = {
@@ -428,104 +440,116 @@ export default class Nestable extends Emitter {
                 collapsedParent: false,
                 disabledParent: false,
                 confinedParent: false,
-                node: item, rect: rect,
+                node: item,
+                rect: rect,
                 parent: false,
+                axis: false,
             };
-			
-			
-            if ( "nestableParent" in item.dataset ) {
+
+            // item has the [data-nestable-parent] attribute
+            if ("nestableParent" in item.dataset) {
                 const parent = document.getElementById(item.dataset.nestableParent);
-				
-                if ( parent ) {
+
+                if (parent) {
                     this.active.parent = parent;
                 }
-            }		
-			
+            }
+
+            // item has the [data-nestable-axis] attribute
+            if ("nestableAxis" in item.dataset) {
+                const axis = item.dataset.nestableAxis;
+                if (axis === "x") {
+                    this.active.axis = "x";
+                } else if (axis === "y") {
+                    this.active.axis = "y";
+                }
+            }
+
             this.placeholder.style.height = `${rect.height}px`;
             // this.placeholder.style.width = `${rect.width}px`;
-			
-            if ( this.config.showPlaceholderOnMove ) {
+
+            if (this.config.showPlaceholderOnMove) {
                 this.placeholder.style.opacity = 0;
             }
-			
-            if ( !this.container ) {
+
+            if (!this.container) {
                 this.container = document.createElement(this.config.nodes.list);
                 this.container.classList.add(this.config.classes.list);
-                this.container.classList.add(this.config.classes.container);				
+                this.container.classList.add(this.config.classes.container);
                 this.container.id = `nestable_${this.id}`;
             }
-			
+
             this.container.style.left = `${rect.left}px`;
             this.container.style.top = `${rect.top}px`;
             this.container.style.height = `${rect.height}px`;
-            this.container.style.width = `${rect.width}px`;			
-			
+            this.container.style.width = `${rect.width}px`;
+
             item.parentNode.insertBefore(this.placeholder, item);
-			
+
             document.body.appendChild(this.container);
             this.container.appendChild(item);
-			
+
             this.newParent = false;
-			
+
             this.dragDepth = 0;
-			
+
             // total depth of dragging item
             const items = DOM.selectAll(this.config.nodes.item, item);
             for (let i = 0; i < items.length; i++) {
-                    const depth = DOM.parents(items[i], this.config.nodes.list).length - 1;
-                    if (depth > this.dragDepth) {
-                            this.dragDepth = depth;
-                    }
+                const depth = DOM.parents(items[i], this.config.nodes.list).length - 1;
+                if (depth > this.dragDepth) {
+                    this.dragDepth = depth;
+                }
             }
-			
+
             this.emit("start", this.active);
         }
     }
-	
+
     _onMouseMove(e) {
-        if ( this.active ) {
-			
-            if ( this.config.showPlaceholderOnMove ) {
+        if (this.active) {
+
+            if (this.config.showPlaceholderOnMove) {
                 this.placeholder.style.opacity = 1;
             }
-			
+
             e = this._getEvent(e);
-			
+
             let x = e.pageX - this.origin.x;
             let y = e.pageY - this.origin.y;
-			
-            if ( e.pageY > this.last.y ) {
+
+            if (e.pageY > this.last.y) {
                 this.last.dirY = 1;
-            } else if ( e.pageY < this.last.y ) {
+            } else if (e.pageY < this.last.y) {
                 this.last.dirY = -1;
             }
-			
-            if ( e.pageX > this.last.x ) {
+
+            if (e.pageX > this.last.x) {
                 this.last.dirX = 1;
-            } else if ( e.pageX < this.last.x ) {
+            } else if (e.pageX < this.last.x) {
                 this.last.dirX = -1;
-            }		
-			
+            }
+
             let movement = false;
-			
-            if ( Math.abs(x) > Math.abs(y) ) {
+
+            if (Math.abs(x) > Math.abs(y)) {
                 movement = "x";
-            } else if ( Math.abs(x) < Math.abs(y) ) {
+            } else if (Math.abs(x) < Math.abs(y)) {
                 movement = "y";
             }
-			
+
             var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
             const elements = document.elementsFromPoint(e.pageX, e.pageY - scrollTop);
-			
-            if ( movement === "x" ) {
-                if ( this.last.dirX > 0 && x > this.config.threshold ) { // moving right				
-					
+
+            if (movement === "x" && this.active.axis !== "y") {
+                if (this.last.dirX > 0 && x > this.config.threshold) { // moving right				
+
                     const prevEl = this.placeholder.previousElementSibling;
-					
-                    if ( prevEl ) {
-						
-                        if ( prevEl.classList.contains(this.config.classes.collapsed) ) {
-                            if ( !this.active.collapsedParent ) {
+
+                    if (prevEl) {
+
+                        if (prevEl.classList.contains(this.config.classes.collapsed)) {
+                            if (!this.active.collapsedParent) {
                                 this.emit("error.collapsed", this.active.node, prevEl);
 
                                 this.active.collapsedParent = true;
@@ -533,16 +557,16 @@ export default class Nestable extends Emitter {
                         } else {
                             const disabled = this._isDisabled(prevEl);
 
-                            if ( !disabled ) {
+                            if (!disabled) {
                                 const depth = DOM.parents(this.placeholder, this.config.nodes.list).length;
-                                let allowNesting = depth + this.dragDepth <= this.config.maxDepth;							
-                                let parentEl = prevEl.querySelector(this.config.nodes.list);					
+                                let allowNesting = depth + this.dragDepth <= this.config.maxDepth;
+                                let parentEl = prevEl.querySelector(this.config.nodes.list);
 
-                                if ( allowNesting ) {
+                                if (allowNesting) {
                                     this.active.maxDepth = false;
                                     const oldParent = this.placeholder.closest(`.${this.config.classes.list}`);
 
-                                    if ( !parentEl ) {
+                                    if (!parentEl) {
                                         parentEl = this._makeParent(prevEl);
                                     }
 
@@ -550,19 +574,19 @@ export default class Nestable extends Emitter {
                                         parent: parentEl,
                                         type: "appendChild",
                                     });
-																	
+
                                     this.emit("nest", parentEl, oldParent);
 
                                     this.origin.x = e.pageX;
                                 } else {
-                                    if ( !this.active.maxDepth ) {
+                                    if (!this.active.maxDepth) {
                                         this.emit("error.maxdepth", this.active.node, this.config.maxDepth);
 
                                         this.active.maxDepth = true;
                                     }
                                 }
                             } else {
-                                if ( !this.active.disabledParent ) {
+                                if (!this.active.disabledParent) {
                                     this.emit("error.disabled");
 
                                     this.active.disabledParent = true;
@@ -570,77 +594,80 @@ export default class Nestable extends Emitter {
                             }
                         }
                     }
-					
-                } else if ( this.last.dirX < 0 && x < -this.config.threshold ) { // moving left
-					
+
+                } else if (this.last.dirX < 0 && x < -this.config.threshold) { // moving left
+
                     this.active.maxDepth = false;
                     this.active.disabledParent = false;
                     this.active.collapsedParent = false;
                     // this.active.confinedParent = false;
-					
+
                     const listEl = this.placeholder.closest(this.config.nodes.list);
                     const parentEl = listEl.closest(this.config.nodes.item);
 
-                    if ( parentEl &&
-                            ((listEl.childElementCount > 1 && this.placeholder !== listEl.firstElementChild) || listEl.childElementCount < 2 && this.placeholder === listEl.firstElementChild) ) {
+                    if (parentEl &&
+                        ((listEl.childElementCount > 1 && this.placeholder !== listEl.firstElementChild) || listEl.childElementCount < 2 && this.placeholder === listEl.firstElementChild)) {
                         const nextEl = parentEl.nextElementSibling;
                         const oldParent = this.placeholder.closest(`.${this.config.classes.list}`);
-												
-                        if ( nextEl ) {
+
+                        if (nextEl) {
                             const list = nextEl.closest(this.config.nodes.list);
                             this._moveElement(this.placeholder, {
                                 parent: list,
                                 type: "insertBefore",
                                 sibling: nextEl
                             });
-							
+
                             this.origin.x = e.pageX;
                         } else {
                             this._moveElement(this.placeholder, {
                                 parent: parentEl.closest(this.config.nodes.list),
                                 type: "appendChild",
-                            });							
-							
+                            });
+
                             this.origin.x = e.pageX;
                         }
-											
+
                         this.emit("unnest", parentEl, oldParent);
                     }
                 }
             } else {
                 // check if we're over a valid item
-                for ( const element of elements ) {
-                    if ( element !== this.active.node &&
-                            !this.active.node.contains(element) && 
-                            element.classList.contains(this.config.classes.content)  ) {
+                for (const element of elements) {
+                    const moveY = element !== this.active.node &&
+                        !this.active.node.contains(element) &&
+                        element.classList.contains(this.config.classes.content) &&
+                        this.active.axis !== "x";
+
+                    if (moveY) {
                         const item = element.closest(`.${this.config.classes.item}`);
 
-                        if ( item ) {
-                            if ( movement === "y" ) {
+                        if (item) {
+                            if (movement === "y") {
                                 const childListEl = item.querySelector(this.config.nodes.list);
-                                if ( childListEl && !item.classList.contains(this.config.classes.collapsed) ) { // item is parent
-                                    if ( this.last.dirY > 0 ) { // moving item down
+                                if (childListEl && !item.classList.contains(this.config.classes.collapsed)) { // item is parent
+                                    if (this.last.dirY > 0) { // moving item down
                                         this._moveElement(this.placeholder, {
                                             parent: item.lastElementChild,
                                             type: "insertBefore",
                                             sibling: item.lastElementChild.firstElementChild,
                                             animatable: item.querySelector(`.${this.config.classes.content}`)
-                                        });			
-                                    } else if ( this.last.dirY < 0 ) { // moving item up
+                                        });
+                                    } else if (this.last.dirY < 0) { // moving item up
                                         this._moveElement(this.placeholder, {
                                             parent: item.parentNode,
                                             type: "insertBefore",
                                             sibling: item,
                                             animatable: item.querySelector(`.${this.config.classes.content}`)
-                                        });						
+                                        });
                                     }
-                                    
+
                                     this.emit("reorder");
                                 } else { // item is not a parent
-                                    if ( this.last.dirY > 0 ) { // moving item down
+                                    if (this.last.dirY > 0) { // moving item down
                                         const nextEl = item.nextElementSibling;
 
-                                        if ( nextEl ) { // item has an item below it
+                                        if (nextEl) { // item has an item below it
                                             this._moveElement(this.placeholder, {
                                                 parent: item.parentNode,
                                                 type: "insertBefore",
@@ -654,25 +681,25 @@ export default class Nestable extends Emitter {
                                                 animatable: item.querySelector(`.${this.config.classes.content}`)
                                             });
                                         }
-                                    } else if ( this.last.dirY < 0 ) { // moving item up
+                                    } else if (this.last.dirY < 0) { // moving item up
                                         this._moveElement(this.placeholder, {
                                             parent: item.parentNode,
                                             type: "insertBefore",
                                             sibling: item,
                                             animatable: item.querySelector(`.${this.config.classes.content}`)
-                                        });								
+                                        });
                                     }
 
                                     this.emit("reorder");
                                 }
                             }
                         }
-						
+
                         const parentEl = item.closest(`.${this.config.classes.parent}`);
-						
-                        if ( parentEl ) {
-                            if ( parentEl !== this.parent ) {
-                                if ( parentEl._nestable ) {
+
+                        if (parentEl) {
+                            if (parentEl !== this.parent) {
+                                if (parentEl._nestable) {
                                     this.newParent = parentEl;
                                 }
                             }
@@ -680,80 +707,92 @@ export default class Nestable extends Emitter {
                     }
                 }
             }
-			
+
             this.placeholder.classList.toggle(this.config.classes.error,
-                                                                                this.active.disabledParent || 
-                                                                                this.active.maxDepth || 
-                                                                                this.active.collapsedParent || 
-                                                                                this.active.confinedParent);
-			
-            this.container.style.transform = `translate3d(${e.pageX - this.origin.original.x}px, ${e.pageY - this.origin.original.y}px, 0)`;
-			
+                this.active.disabledParent ||
+                this.active.maxDepth ||
+                this.active.collapsedParent ||
+                this.active.confinedParent);
+
+            let mx = e.pageX - this.origin.original.x;
+            let my = e.pageY - this.origin.original.y;
+
+            // item movement is confined
+            if (this.active.axis) {
+                if (this.active.axis === "x") {
+                    my = 0;
+                } else if (this.active.axis === "y") {
+                    mx = 0;
+                }
+            }
+
+            this.container.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
+
             this.lastParent = this.placeholder.parentNode;
 
             this.emit("move", this.active);
         }
-		
+
         this.last = {
             x: e.pageX,
             y: e.pageY
         };
     }
-	
+
     _moveElement(el, type) {
         let ppos = false;
-        let ipos = false;		
-		
+        let ipos = false;
+
         // prevent moving if item has disabled parents
-        if ( this._isDisabled(type.parent) ) {
+        if (this._isDisabled(type.parent)) {
             return false;
         }
 
         // prevent moving if item is confined to parent with data-nestable-parent
-        if ( this.active.parent ) {
-            if ( !DOM.parents(type.parent, `#${this.active.parent.id}`).includes(this.active.parent) ) {
-                if ( !this.active.confinedParent ) {
-					
+        if (this.active.parent) {
+            if (!DOM.parents(type.parent, `#${this.active.parent.id}`).includes(this.active.parent)) {
+                if (!this.active.confinedParent) {
+
                     this.emit("error.confined", el, this.active.parent, type.parent);
-                    this.active.confinedParent  = true;
+                    this.active.confinedParent = true;
                 }
-				
+
                 return false;
             }
         }
-		
+
         let listEl = el.closest(this.config.nodes.list);
 
         // if animation is enabled, we need to get the original position of the element first
-        if ( this.config.animation > 0 ) {
+        if (this.config.animation > 0) {
             ppos = DOM.rect(this.placeholder);
-            if ( type.animatable ) {
+            if (type.animatable) {
                 ipos = DOM.rect(type.animatable)
             }
         }
-		
-        if ( type.type === "insertBefore" ) {
-            type.parent.insertBefore(el, type.sibling);			
-        } else if ( type.type === "appendChild" ) {
+
+        if (type.type === "insertBefore") {
+            type.parent.insertBefore(el, type.sibling);
+        } else if (type.type === "appendChild") {
             type.parent.appendChild(el);
         }
-		
-        if ( !listEl.childElementCount ) {
+
+        if (!listEl.childElementCount) {
             this._unmakeParent(listEl.parentNode);
         }
-		
+
         this.emit("order.change", this.active.node, type.parent, listEl);
-		
-            // animate the elements
-        if ( this.config.animation > 0 ) {
+
+        // animate the elements
+        if (this.config.animation > 0) {
             this._animateElement(this.placeholder, ppos);
-			
-            if ( type.animatable && ipos ) {
+
+            if (type.animatable && ipos) {
                 this._animateElement(type.animatable, ipos);
             }
         }
     }
-	
+
     _animateElement(el, obj) {
         // Animate an element's change in position
         // caused by a change in the DOM order
@@ -783,135 +822,135 @@ export default class Nestable extends Emitter {
             // css.zIndex = "";
             css.transform = "";
             css.transition = "";
-        }, this.config.animation);		
+        }, this.config.animation);
     }
 
     _repaint(el) {
         return el.offsetHeight;
     }
-	
+
     _onMouseUp(e) {
-        if ( this.active ) {
-			
-            if ( this.config.showPlaceholderOnMove ) {
+        if (this.active) {
+
+            if (this.config.showPlaceholderOnMove) {
                 this.placeholder.style.opacity = 0;
-            }			
-			
+            }
+
             e = this._getEvent(e);
-			
+
             const prect = DOM.rect(this.active.node);
-			
+
             // this.active.node.removeAttribute("style");
             this.container.removeAttribute("style");
-			
+
             this.parent.classList.remove(this.config.classes.moving);
-			
+
             this.placeholder.parentNode.replaceChild(this.active.node, this.placeholder);
-			
+
             this._animateElement(this.active.node, prect);
-			
+
             this.placeholder.classList.remove(this.config.classes.error);
             this.active.node.classList.remove(this.config.classes.dragging);
 
             this.active = false;
-			
+
             document.body.removeChild(this.container);
-			
+
             this._getData();
-			
-            if ( this.newParent ) {
+
+            if (this.newParent) {
                 this.newParent._nestable._getData();
             }
-			
+
             this.emit("stop", this.data);
-			
+
             this.update();
         }
     }
-	
+
     _toggleList(item, btn) {
-        if ( !item.classList.contains(this.config.classes.collapsed) ) {
+        if (!item.classList.contains(this.config.classes.collapsed)) {
             this._collapseList(item, btn);
         } else {
             this._expandList(item, btn);
         }
     }
-	
+
     _collapseList(item, btn) {
-        if ( !btn ) {
+        if (!btn) {
             btn = item.querySelector(`.${this.config.classes.button}`)
         }
 
         btn.textContent = this.config.expandButtonContent;
         item.classList.add(this.config.classes.collapsed);
     }
-	
+
     _expandList(item, btn) {
-        if ( !btn ) {
+        if (!btn) {
             btn = item.querySelector(`.${this.config.classes.button}`)
         }
 
         btn.textContent = this.config.collapseButtonContent;
         item.classList.remove(this.config.classes.collapsed);
-    }	
-	
+    }
+
     _makeParent(el) {
         let parentEl = el.querySelector(this.config.nodes.list);
-		
-        if ( !parentEl ) {
+
+        if (!parentEl) {
             parentEl = document.createElement(this.config.nodes.list);
             parentEl.classList.add(this.config.classes.list);
             el.appendChild(parentEl);
         } else {
             parentEl.classList.add(this.config.classes.list);
         }
-		
+
         const button = document.createElement("button");
         button.classList.add(this.config.classes.button);
         button.type = "button";
         button.textContent = this.config.collapseButtonContent;
         el.insertBefore(button, el.firstElementChild);
-		
+
         return parentEl;
     }
-	
+
     _unmakeParent(el) {
         const list = el.querySelector(this.config.nodes.list);
         const btn = el.querySelector("button");
-		
-        if ( list ) {
+
+        if (list) {
             el.removeChild(list);
         }
-		
-        if ( btn ) {
+
+        if (btn) {
             el.removeChild(btn);
         }
-		
-        return 
+
+        return
     }
-	
+
     _getData(type = "nodes") {
         let data = [];
-		
+
         const step = (level) => {
             const array = [];
             const items = DOM.children(level, this.config.nodes.item);
 
             items.forEach((li) => {
                 const item = {};
-				
-                if ( type === "nodes" ) {
+
+                if (type === "nodes") {
                     item.node = li;
                 } else {
                     item.data = Object.assign({}, li.dataset);
-					
+
                     if (this.config.includeContent) {
                         const content = li.querySelector(`.${this.config.classes.content}`);
 
                         if (content) {
                             item.content = content.innerHTML;
                         }
-                    }					
+                    }
                 }
 
                 const sub = li.querySelector(this.config.nodes.list);
@@ -919,19 +958,19 @@ export default class Nestable extends Emitter {
                 if (sub) {
                     item.children = step(sub);
                 }
-				
+
                 array.push(item);
             });
-			
+
             return array;
         };
-		
+
         data = step(this.parent);
-		
-        if ( type === "nodes" ) {
+
+        if (type === "nodes") {
             this.data = data;
         }
-		
+
         return data;
     }
 }
