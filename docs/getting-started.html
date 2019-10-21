@@ -102,47 +102,45 @@
 
 <h2 class="scroll-title" id="browser">Browser</h2>
 
-<p>Grab the file from one of the CDNs and include it in your page:</p>
+<p>Grab the files from one of the CDNs and include it in your page:</p>
 
-<p><pre class="language-markup"><code>https://unpkg.com/nestablejs@0.0.1/dist/nestable.js</code></pre></p>
+<p><pre class="language-markup"><code>&lt;script src="https://cdn.jsdelivr.net/npm/nestablejs@latest/dist/nestable.js"&gt;&lt;/script&gt;</code></pre></p>
 
-<p>or</p>
+You can also grab the optional css file for default styling:
 
-<p><pre class="language-markup"><code>https://cdn.jsdelivr.net/npm/nestablejs@latest/dist/nestable.js</code></pre></p>
-
-<p>You can replace latest with the required release number if needed.</p>
+<p><pre class="language-markup"><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nestablejs@latest/dist/nestable.css"&gt;</code></pre></p>
 
  <h2 class="scroll-title" id="initialise"><span>Initialise</h2>
 
 <p>This will create a new instance from the "#myList" element.</p>
 
 <p><pre class="language-markup"><code>&lt;ol id="myList"&gt;
-    &lt;li class="item"&gt;Item 1&lt;/li&gt;
-    &lt;li class="item"&gt;Item 2
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2
         &lt;ol&gt;
-            &lt;li class="item"&gt;Item 3&lt;/li&gt;
-            &lt;li class="item"&gt;Item 4&lt;/li&gt;
+            &lt;li&gt;Item 3&lt;/li&gt;
+            &lt;li&gt;Item 4&lt;/li&gt;
         &lt;/ol&gt;
     &lt;/li&gt;
-    &lt;li class="item"&gt;Item 5&lt;/li&gt;
-    &lt;li class="item"&gt;Item 6&lt;/li&gt;
-    &lt;li class="item"&gt;Item 7&lt;/li&gt;
-    &lt;li class="item"&gt;Item 8&lt;/li&gt;
+    &lt;li&gt;Item 5&lt;/li&gt;
+    &lt;li&gt;Item 6&lt;/li&gt;
+    &lt;li&gt;Item 7&lt;/li&gt;
+    &lt;li&gt;Item 8&lt;/li&gt;
 &lt;/ol&gt;</code></pre></p>
 <p><pre class="language-js"><code>const instance = new Nestable("#myList");</code></pre></p>
 <p>
     <ol id="myList">
-        <li class="item">Item 1</li>
-        <li class="item">Item 2
+        <li>Item 1</li>
+        <li>Item 2
             <ol>
-                <li class="item">Item 3</li>
-                <li class="item">Item 4</li>
+                <li>Item 3</li>
+                <li>Item 4</li>
             </ol>
         </li>
-        <li class="item">Item 5</li>
-        <li class="item">Item 6</li>
-        <li class="item">Item 7</li>
-        <li class="item">Item 8</li>
+        <li>Item 5</li>
+        <li>Item 6</li>
+        <li>Item 7</li>
+        <li>Item 8</li>
     </ol>
 </p>
                             </div>
@@ -190,7 +188,7 @@
         <script src="assets/js/ResizeSensor.min.js"></script>
         <script src="assets/js/theia-sticky-sidebar.min.js"></script>
         <script type="text/javascript" src="assets/js/prism.min.js"></script>
-        <script id="main-js" type="text/javascript" src="https://unpkg.com/nestablejs@0.0.7/dist/nestable.js"></script>
+        <script id="main-js" type="text/javascript" src="https://unpkg.com/nestablejs@0.0.8/dist/nestable.js"></script>
         <script src="assets/js/script.js"></script>
         <script src="assets/js/getting-started.js"></script>
     </body>
