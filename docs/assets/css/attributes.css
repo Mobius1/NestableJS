@@ -1,3 +1,6 @@
+#myList {
+    width: 400px;
+}
 .table thead th:first-child, .table thead th:nth-child(2) {
     width: 20%;
 }
