@@ -1,0 +1,1 @@
+const instance = new Nestable("#myList");

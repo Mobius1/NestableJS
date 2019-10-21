@@ -154,6 +154,9 @@ function init() {
                                             <li><a href="https://mobius1.github.io/NestableJS/api/events/start.html">start</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/events/move.html">move</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/events/stop.html">stop</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/nest.html">nest</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/unnest.html">unnest</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/reorder.html">reorder</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/events/error.maxdepth.html">error.maxdepth</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/events/error.disabled.html">error.disabled</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/events/error.collapsed.html">error.collapsed</a></li>

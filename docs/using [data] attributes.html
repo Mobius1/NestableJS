@@ -38,20 +38,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="versionDropdownMenu">
                             <div>Versions</div>
-                            <a class="dropdown-item active" href="#">latest</a>
-                            <a class="dropdown-item" href="#">stable</a>
-                            <a class="dropdown-item" href="#">v1.7.1</a>
-                            <a class="dropdown-item" href="#">v1.7.0</a>
-                            <a class="dropdown-item" href="#">v1.6.4</a>
-                            <a class="dropdown-item" href="#">v1.6.1</a>
-                            <a class="dropdown-item" href="#"> v1.6.0</a>
-                            <a class="dropdown-item" href="#">v1.5.1</a>
-                            <a class="dropdown-item" href="#">v1.5.0</a>
-                            <a class="dropdown-item" href="#">v1.4.1</a>
-                            <a class="dropdown-item" href="#">v1.4.0</a>
-                            <a class="dropdown-item" href="#">1.3.1</a>
-                            <a class="dropdown-item" href="#">1.3.0</a>
-                            <a class="dropdown-item" href="#">master</a>
+
                         </div>
                     </div>
                     <div class="form-group has-search">
@@ -75,16 +62,7 @@
                             <li>
                                 <a class="has-arrow" href="api/options.html">Options</a>
                                 <ul aria-expanded="true">
-                                    <li><a href="api/options/filter.html">filter</a></li>
-                                    <li class="active"><a href="api/options/appendTo.html">appendTo</a></li>
-                                    <li><a href="api/options/tolerance.html">tolerance</a></li>
-                                    <li><a href="api/options/ignore.html">ignore</a></li>
-                                    <li><a href="api/options/toggle.html">toggle</a></li>
-                                    <li><a href="api/options/throttle.html">throttle</a></li>
-                                    <li><a href="api/options/autoScroll.html">autoScroll</a></li>
-                                    <li><a href="api/options/autorefresh.html">autoRefresh</a></li>
-                                    <li><a href="api/options/lasso.html">lasso</a></li>
-                                    <li><a href="api/options/classes.html">classes</a></li>
+
                                 </ul>                                
                             </li>
                             <li>
@@ -107,111 +85,75 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#">API</a></li>
-                                    <li class="breadcrumb-item active"><a href="#">Events</a></li>
+                                    <li class="breadcrumb-item active"><a href="#">Using [data-*] Attributes</a></li>
                                 </ol>
                             </nav>
                             <!-- /.End of breadcrumb -->
                             <div class="doc-content">
-                                <h1 class="logo-title"><i class="mdi mdi-select-drag"></i> Events</h1>
+                                <h1 class="logo-title"><i class="mdi mdi-select-drag"></i> Using [data-*] Attributes</h1>
                                 <hr />
 
 
-<p>Nestable fires a number of custom events that you can listen for.</p>
+<p>Nestable can utilise HTML5 [data-nestable-*] attributes for further customisation.</p>
 
-<p>You can attach a number of custom event listeners using the <a href="api/methods/on.html"><code>on()</code></a> method and pass the event name and a callback as the first two arguments:</p>
+<p>The attributes must be added to the list item elements.</p>
 
-<pre><code class="javascript language-javascript">const instance = new Nestable("#myList");
+<pre><code class="javascript language-markup">&lt;ol&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li id="item2"&gt;Item 2
+        &lt;ol&gt;
+            &lt;li data-nestable-parent="item2"&gt;Item 3&lt;/li&gt;
+            &lt;li data-nestable-parent="item2"&gt;Item 4
+                &lt;ol&gt;
+                    &lt;li data-nestable-parent="item2"&gt;Item 5&lt;/li&gt;
+                    &lt;li data-nestable-parent="item2"&gt;Item 6&lt;/li&gt;
+                &lt;/ol&gt;					
+            &lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/li&gt;
+    &lt;li data-nestable-axis="x"&gt;Item 7&lt;/li&gt;
+    &lt;li&gt;Item 8&lt;/li&gt;
+    &lt;li&gt;Item 9
+        &lt;ol&gt;
+            &lt;li&gt;Item 10&lt;/li&gt;
+            &lt;li&gt;Item 11&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/li&gt;
+    &lt;li data-nestable-axis="y"&gt;Item 12&lt;/li&gt;
+    &lt;li&gt;Item 13&lt;/li&gt;
+    &lt;li data-nestable-disabled&gt;Item 14&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
 
-instance.on('XXXX', fn);
-</code></pre>
 
-<p>Event listeners can be detached by calling the <a href="api/methods/off.html"><code>off()</code></a> method with the same arguments:</p>
-
-<pre><code class="javascript language-javascript">instance.off('XXXX', fn);
-</code></pre>
-
-<hr />
-
-<p>Both the <code>on()</code> and <code>off()</code> methods function the same as the native <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"><code>addEventListener</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener"><code>removeEventListener</code></a> methods respectively. </p>
-
-<p>This means that in order to remove a custom event listener from the instance, you must pass the same <a href="https://developer.mozilla.org/en-US/docs/web/JavaScript/Reference/Operators/function">function expression</a> to the <code>off()</code> method as you did to the <code>on()</code> method - <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">declared / anonymous functions</a> cannot be removed.</p>
-
-<h3 id="incorrect">Incorrect</h3>
-
-<pre><code class="javascript language-javascript">instance.on('stop', () =&gt; {
-    counter.innerHTML = selected.length;
-});
-</code></pre>
-
-<h3 id="correct">Correct</h3>
-
-<pre><code class="javascript language-javascript">const updateDisplay = () =&gt; {
-    counter.innerHTML = selected.length;
-};
-
-// attach the event listener
-instance.on('stop', updateDisplay);
-
-// detach the event listener
-instance.off('stop', updateDisplay);
-</code></pre>
 
 <hr />
 
-<h2 id="eventreference">Event reference</h2>
+<h2 id="eventreference">Attribute reference</h2>
 
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>Event Name</th>
+            <th>Attribute Name</th>
+            <th>Value</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody> 
         <tr>
-            <td><a href="api/events/init.html"><code>init</code></a></td>
-            <td>Fires when the instance is ready to be used.</td>
+            <td><a href="api/data-attributes/axis.html"><code>[data-nestable-axis="axis"]</code></a></td>
+            <td><code>"x"</code> or <code>"y"</code></td>
+            <td>Confines the list item to either the x (left / right) or y (up / down) axis when moving. Setting to <code>"x"</code> will allow nesting, but prevent reordering. Setting to <code>"y"</code> will allow reordering, but prevent nesting.</td>
         </tr>
         <tr>
-            <td><a href="api/events/start.html"><code>start</code></a></td>
-            <td>Fired on mousedown / touchstart.</td>
-        </tr>         
+            <td><a href="api/data-attributes/disabled.html"><code>[data-nestable-disabled]</code></a></td>
+            <td><code></code></td>
+            <td>Disables the item preventing nesting within it. The value can be omitted or a <code>boolean</code> can be used.</td>
+        </tr>                
         <tr>
-            <td><a href="api/events/move.html"><code>move</code></a></td>
-            <td>Fired on mousemove / touchmove.</td>
-        </tr>
-        <tr>
-            <td><a href="api/events/stop.html"><code>stop</code></a></td>
-            <td>Fired on mouseup / touchend.</td>
-        </tr>
-        <tr>
-            <td><a href="api/events/nest.html"><code>nest</code></a></td>
-            <td>Fired when an item is nested.</td>
-        </tr> 
-        <tr>
-            <td><a href="api/events/unnest.html"><code>unnest</code></a></td>
-            <td>Fired when an item is unnested.</td>
-        </tr> 
-        <tr>
-            <td><a href="api/events/reorder.html"><code>reorder</code></a></td>
-            <td>Fired when an item is reordered.</td>
-        </tr>                         
-        <tr>
-            <td><a href="api/events/error.maxdepth.html"><code>error.maxdepth</code></a></td>
-            <td>Fires when nesting is attemped when max nesting is already reached.</td>
-        </tr>
-        <tr>
-            <td><a href="api/events/error.disabled.html"><code>error.disabled</code></a></td>
-            <td>Fires when dropping or nesting is attemped in a disabled item.</td>
-        </tr>    
-        <tr>
-            <td><a href="api/events/error.collapsed.html"><code>error.collapsed</code></a></td>
-            <td>Fires when nesting is attemped in a collapsed item.</td>
-        </tr>    
-        <tr>
-            <td><a href="api/events/error.confined.html"><code>error.confined</code></a></td>
-            <td>Fires when attempting to move a confined item out of it's parent.</td>
-        </tr>                                                              
+            <td><a href="api/data-attributes/parent.html"><code>[data-nestable-parent="elementId"]</code></a></td>
+            <td>CSS3 ID selector string</td>
+            <td>Confines any list item with the attribute to the parent defined in the value. The value must be the id string of the parent element WITHOUT the #.</td>
+        </tr>                                                                  
     </tbody>
 </table>
 
@@ -220,37 +162,33 @@ instance.off('stop', updateDisplay);
 <div id="container-demo">
     <p>
         <ol id="myList" class="list">
-            <li data-id="1" class="item">Item 1</li>
-            <li data-id="2" class="item">Item 2
+            <li><span class="content">Item 1</span></li>
+            <li id="item2"><span class="content">Item 2</span>
                 <ol>
-                    <li data-id="3" class="item">Item 3</li>
-                    <li data-id="4" class="item">Item 4
+                    <li data-nestable-parent="item2"><span class="content">Item 3</span> <span class="label">data-nestable-parent="item2"</span></li>
+                    <li data-nestable-parent="item2"><span class="content">Item 4</span> <span class="label">data-nestable-parent="item2"</span>
                         <ol>
-                            <li data-id="5" class="item">Item 5</li>
-                            <li data-id="6" class="item">Item 6</li>
+                            <li data-nestable-parent="item2"><span class="content">Item 5</span> <span class="label">data-nestable-parent="item2"</span></li>
+                            <li data-nestable-parent="item2"><span class="content">Item 6</span> <span class="label">data-nestable-parent="item2"</span></li>
                         </ol>					
                     </li>
                 </ol>
             </li>
-            <li data-id="7" class="item">Item 7</li>
-            <li data-id="8" class="item">Item 8</li>
-            <li data-id="9" class="item">Item 9
+            <li data-nestable-axis="x"><span class="content">Item 7</span> <span class="label">data-nestable-axis="x"</span></li>
+            <li><span class="content">Item 8</span></li>
+            <li><span class="content">Item 9</span>
                 <ol>
-                    <li data-id="10" class="item">Item 10</li>
-                    <li data-id="11" class="item">Item 11</li>
+                    <li><span class="content">Item 10</span></li>
+                    <li><span class="content">Item 11</span></li>
                 </ol>
             </li>
-            <li data-id="12" class="item">Item 12</li>
+            <li data-nestable-axis="y"><span class="content">Item 12</span> <span class="label">data-nestable-axis="y"</span></li>
+            <li><span class="content">Item 13</span></li>
+            <li data-nestable-disabled><span class="content">Item 14</span> <span class="label">data-nestable-disabled</span></li>
         </ol>
 
-    </p>  
-    <p>
-        <h5>Events</h5>
-        <div id="events"></div>
-    </p>  
+    </p>   
 </div>
-
-
 
 
 <hr />
@@ -301,6 +239,6 @@ instance.off('stop', updateDisplay);
         <script type="text/javascript" src="https://mobius1.github.io/NestableJS/assets/js/prism.min.js"></script>
         <script id="main-js" type="text/javascript" src="https://unpkg.com/nestablejs@0.0.6/dist/nestable.js"></script>
         <script src="https://mobius1.github.io/NestableJS/assets/js/script.js"></script>
-        <script src="https://mobius1.github.io/NestableJS/assets/js/events.js"></script>
+        <script src="https://mobius1.github.io/NestableJS/assets/js/attributes.js"></script>
     </body>
 </html>
