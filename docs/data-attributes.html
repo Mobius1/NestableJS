@@ -14,7 +14,7 @@
         <link href="https://mobius1.github.io/NestableJS/assets/css/github.min.css" rel="stylesheet">
         <link href="https://mobius1.github.io/NestableJS/assets/css/prism.css" rel="stylesheet">
         <link href="https://mobius1.github.io/NestableJS/assets/css/style.css" rel="stylesheet">
-        <link href="https://mobius1.github.io/NestableJS/assets/css/events.css" rel="stylesheet">
+        <link href="https://mobius1.github.io/NestableJS/assets/css/attributes.css" rel="stylesheet">
         <title>NestableJS - DOCS</title>
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="https://mobius1.github.io/NestableJS/assets/img/favicon.png" />
@@ -85,12 +85,12 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#">API</a></li>
-                                    <li class="breadcrumb-item active"><a href="#">Using [data-*] Attributes</a></li>
+                                    <li class="breadcrumb-item active"><a href="#">Using [data-nestable-*] Attributes</a></li>
                                 </ol>
                             </nav>
                             <!-- /.End of breadcrumb -->
                             <div class="doc-content">
-                                <h1 class="logo-title"><i class="mdi mdi-select-drag"></i> Using [data-*] Attributes</h1>
+                                <h1 class="logo-title"><i class="mdi mdi-select-drag"></i> Using [data-nestable-*] Attributes</h1>
                                 <hr />
 
 
@@ -140,7 +140,7 @@
     </thead>
     <tbody> 
         <tr>
-            <td><a href="api/data-attributes/axis.html"><code>[data-nestable-axis="axis"]</code></a></td>
+            <td><a href="api/data-attributes/axis.html"><code>[data-nestable-axis]</code></a></td>
             <td><code>"x"</code> or <code>"y"</code></td>
             <td>Confines the list item to either the x (left / right) or y (up / down) axis when moving. Setting to <code>"x"</code> will allow nesting, but prevent reordering. Setting to <code>"y"</code> will allow reordering, but prevent nesting.</td>
         </tr>
@@ -150,9 +150,9 @@
             <td>Disables the item preventing nesting within it. The value can be omitted or a <code>boolean</code> can be used.</td>
         </tr>                
         <tr>
-            <td><a href="api/data-attributes/parent.html"><code>[data-nestable-parent="elementId"]</code></a></td>
+            <td><a href="api/data-attributes/parent.html"><code>[data-nestable-parent]</code></a></td>
             <td>CSS3 ID selector string</td>
-            <td>Confines any list item with the attribute to the parent defined in the value. The value must be the id string of the parent element WITHOUT the #.</td>
+            <td>Confines any list item to the parent defined in the value. The value must be the id string of the parent element WITHOUT the #.</td>
         </tr>                                                                  
     </tbody>
 </table>

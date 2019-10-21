@@ -1,0 +1,10 @@
+.table thead th:first-child, .table thead th:nth-child(2) {
+    width: 20%;
+}
+.label {
+    font-size: 12px;
+    background-color: #00897B;
+    color: #fff;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
