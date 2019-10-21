@@ -115,8 +115,48 @@ export default class Nestable extends Emitter {
             }, 10);
 
             this.initialised = true;
+
+            if ( this.config.data ) {
+                const req = new XMLHttpRequest();
+                req.responseType = 'json';
+                req.open('GET', this.config.data, true);
+                req.onload = () => {
+                    this.load(req);
+                };
+                req.send(null);
+            }          
         }
     }
+
+    load(data) {
+        this.removeAll();
+			
+        if ( "response" in data ) {
+            data = data.response;
+        }
+			
+        const nest = (item) => {
+            const el = document.createElement(this.config.nodes.item);
+            el.textContent = item.content;
+				
+            if ( item.children ) {
+                const list = document.createElement(this.config.nodes.list);
+					
+                el.appendChild(list);
+                for ( const child of item.children ) {
+                    list.appendChild(nest(child));
+                }
+            }
+				
+            return el;
+        };
+			
+        for ( const item of data ) {
+            this._nest(this.parent.appendChild(nest(item)))
+        }
+			
+        this.emit("loaded");
+    }  
 
     destroy() {
 
