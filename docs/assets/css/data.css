@@ -1,0 +1,62 @@
+#myList {
+    width: 500px;
+    min-height: 500px;
+    position: relative;
+}
+#myList.loaded::before, #myList.loaded::after {
+    display: none;
+}
+#myList::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    content: "Loading...";
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 35px;
+    box-sizing: content-box;
+}
+#myList::after {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #999 #ddd #ddd #ddd;
+    border-radius: 50%;
+    content: "";
+    z-index: 10000;
+    -webkit-animation: 400ms linear 0ms infinite spin;
+            animation: 400ms linear 0ms infinite spin;
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: translate3d(-50%, -50%, 0) rotate(0deg);
+                transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+    to {
+        -webkit-transform: translate3d(-50%, -50%, 0) rotate(360deg);
+                transform: translate3d(-50%, -50%, 0) rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        -webkit-transform: translate3d(-50%, -50%, 0) rotate(0deg);
+                transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+    to {
+        -webkit-transform: translate3d(-50%, -50%, 0) rotate(360deg);
+                transform: translate3d(-50%, -50%, 0) rotate(360deg);
+    }
+}

@@ -14,6 +14,7 @@
         <link href="https://mobius1.github.io/NestableJS/assets/css/github.min.css" rel="stylesheet">
         <link href="https://mobius1.github.io/NestableJS/assets/css/prism.css" rel="stylesheet">
         <link href="https://mobius1.github.io/NestableJS/assets/css/style.css" rel="stylesheet">
+        <link href="https://mobius1.github.io/NestableJS/assets/css/data.css" rel="stylesheet">
         <title>NestableJS - DOCS</title>
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="https://mobius1.github.io/NestableJS/assets/img/favicon.png" />
@@ -51,26 +52,21 @@
                     <li>
                         <a class="has-arrow" href="#" aria-expanded="false">Overview</a>
                         <ul aria-expanded="false">
-                            <li><a href="https://bcbwoodshop.co.uk/api/index.html">Introduction</a></li>
-                            <li><a href="https://bcbwoodshop.co.uk/api/getting-started.html">Getting Started</a></li>
+                            <li><a href="api/index.html">Introduction</a></li>
+                            <li><a href="api/getting-started.html">Getting Started</a></li>
                         </ul>
                     </li>
                     <li class="active">
-                        <a class="has-arrow" href="#" aria-expanded="true">API</a>
+                        <a class="has-arrow" href="api/#" aria-expanded="true">API</a>
                         <ul aria-expanded="true">
                             <li>
-                                <a class="has-arrow" href="https://bcbwoodshop.co.uk/api/options.html">Options</a>
+                                <a class="has-arrow" href="api/options.html">Options</a>
                                 <ul aria-expanded="true">
 
                                 </ul>                                
                             </li>
-                            <li>
-                                <a href="https://bcbwoodshop.co.uk/api/public-methods.html">Public Methods</a>
-                                <ul aria-expanded="true">
-
-                                </ul>                                  
-                            </li>
-                            <li><a href="https://bcbwoodshop.co.uk/api/events.html">Events</a></li>
+                            <li><a href="api/methods.html">Methods</a></li>
+                            <li><a href="api/events.html">Events</a><ul></ul></li>
                         </ul>
                     </li>
                 </ul>
@@ -82,75 +78,78 @@
                         <div class="col-md-9 content">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="https://mobius1.github.io/NestableJS/">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#">API</a></li>
-                                    <li class="breadcrumb-item active"><a href="#">Public Methods</a></li>
+                                    <li class="breadcrumb-item"><a href="https://mobius1.github.io/NestableJS/options.html">Options</a></li>
+                                    <li class="breadcrumb-item active">data</li>
                                 </ol>
                             </nav>
                             <!-- /.End of breadcrumb -->
                             <div class="doc-content">
-                                <h1 class="logo-title"><i class="mdi mdi-format-list-bulleted-square"></i> Public Methods</h1>
+                                <h1 class="logo-title"><i class="mdi mdi-format-list-bulleted-square"></i> data</h1>
                                 <hr />
-<p>Nestable exposes a number of methods that can be called at any time.</p>
+<h5 id="typeboolean">Type: <code>Object</code></h5>
 
-<pre><code class="javascript language-javascript">const instance = new Nestable("#myList");
+<p>Load structure from remote json source.</p>
 
-instance.methodName();
+<hr />
+
+<pre><code class="javascript language-javascript">const instance = new Nestable({
+    data: "https://mydomain.com/data.json"
+});
 </code></pre>
 
+<p>The layout of the data should be of the following:</p>
+
+<pre><code class="javascript language-javascript">[{
+        "content": "New Item 1"
+    },
+    {
+        "content": "New Item 2",
+        "children": [
+            {
+                "content": "New Item 2.1"
+            },
+            {
+                "content": "New Item 2.2"
+                "children": [
+                    {
+                        "content": "New Item 2.2.1"
+                    },
+                    {
+                        "content": "New Item 2.2.2"
+                    }
+                ]                
+            }
+        ]
+    },
+    {
+        "content": "New Item 3"
+    },
+    {
+        "content": "New Item 4"
+    },
+    ...
+]
+</code></pre>
+
+
 <hr />
 
-<h2 id="publicmethodreference">Public Method Reference</h2>
+<h5 id="demo">Demo</h5>
+<div id="container-demo">
+    <p>
+        <ol id="myList">
 
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Method</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><a href="api/methods/destroy.html">destroy()</a></td>
-            <td>Destroys the instance.</td>
-        </tr>
-        <tr>
-            <td><a href="api/methods/init.html">init()</a></td>
-            <td>Reinitialises the instance after destroying.</td>
-        </tr>
-        <tr>
-            <td><a href="api/methods/disable.html">disable()</a></td>
-            <td>Disables the instance.</td>
-        </tr>
-        <tr>
-            <td><a href="api/methods/enable.html">enable()</a></td>
-            <td>Enables the instance.</td>
-        </tr>
-        <tr>
-            <td><a href="api/methods/on.html">on()</a></td>
-            <td>Add custom event listener. See <a href="events.html">events</a>.</td>
-        </tr>
-        <tr>
-            <td><a href="api/methods/off.html">off()</a></td>
-            <td>Remove custom event listener. See <a href="events.html">events</a>.</td>
-        </tr>
-        <tr>
-            <td><a href="api/methods/add.html">add()</a></td>
-            <td>Add an element to the instance.</td>
-        </tr>
-        <tr>
-            <td><a href="api/methods/remove.html">remove()</a></td>
-            <td>Remove an element from the instance.</td>
-        </tr>
-    </tbody>
-</table>                                
-<hr />
+        </ol>
+    </p>    
+</div>
 
                             </div>
                             <!--  /.End of documentation text content -->
                             <div class="footer-btn d-flex justify-content-between">
-                                <a href="options.html" class="btn"><i class="fas fa-arrow-circle-left"></i>Previous</a>
-                                <a href="api/methods/destroy.html" class="btn">Next<i class="fas fa-arrow-circle-right"></i></a>
+
+                                <a href="threshold.html" class="btn">Next<i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                             <!-- /.End of footer button -->
                         </div>
@@ -192,5 +191,6 @@ instance.methodName();
         <script type="text/javascript" src="https://mobius1.github.io/NestableJS/assets/js/prism.min.js"></script>
         <script id="main-js" type="text/javascript" src="https://unpkg.com/nestablejs@0.0.9/dist/nestable.js"></script>
         <script src="https://mobius1.github.io/NestableJS/assets/js/script.js"></script>
+        <script src="https://mobius1.github.io/NestableJS/assets/js/data.js"></script>
     </body>
 </html>

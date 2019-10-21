@@ -127,6 +127,7 @@ function init() {
 
     menuOptions.lastElementChild.innerHTML = `<li><a href="https://mobius1.github.io/NestableJS/api/options/threshold.html">threshold</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/options/animation.html">animation</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/options/data.html">data</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/options/collapseButtonContent.html">collapseButtonContent</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/options/expandButtonContent.html">expandButtonContent</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/options/maxDepth.html">maxDepth</a></li>
@@ -145,6 +146,7 @@ function init() {
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/disable.html">disable()</a></li>
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/enable.html">enable()</a></li>
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/init.html">init()</a></li>
+                                                <li><a href="https://mobius1.github.io/NestableJS/api/methods/load.html">load()</a></li>
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/off.html">off()</a></li>
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/on.html">on()</a></li>
                                                 <li><a href="https://mobius1.github.io/NestableJS/api/methods/remove.html">remove()</a></li>
