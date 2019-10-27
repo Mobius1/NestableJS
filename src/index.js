@@ -348,6 +348,13 @@ export default class Nestable extends Emitter {
         this.update();
     }
 
+    removeAll() {
+        const nodes = this.parent.children;
+        for (var i = nodes.length - 1; i >= 0; i--) {
+            this.parent.removeChild(nodes[i]);
+        }
+    }
+
     update() {
         this._getData("nodes");
 
