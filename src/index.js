@@ -116,7 +116,7 @@ export default class Nestable extends Emitter {
 
             this.initialised = true;
 
-            if ( this.config.data ) {
+            if (this.config.data) {
                 const req = new XMLHttpRequest();
                 req.responseType = 'json';
                 req.open('GET', this.config.data, true);
@@ -124,39 +124,39 @@ export default class Nestable extends Emitter {
                     this.load(req);
                 };
                 req.send(null);
-            }          
+            }
         }
     }
 
     load(data) {
         this.removeAll();
-			
-        if ( "response" in data ) {
+
+        if ("response" in data) {
             data = data.response;
         }
-			
+
         const nest = (item) => {
             const el = document.createElement(this.config.nodes.item);
             el.textContent = item.content;
-				
-            if ( item.children ) {
+
+            if (item.children) {
                 const list = document.createElement(this.config.nodes.list);
-					
+
                 el.appendChild(list);
-                for ( const child of item.children ) {
+                for (const child of item.children) {
                     list.appendChild(nest(child));
                 }
             }
-				
+
             return el;
         };
-			
-        for ( const item of data ) {
+
+        for (const item of data) {
             this._nest(this.parent.appendChild(nest(item)))
         }
-			
+
         this.emit("loaded");
-    }  
+    }
 
     destroy() {
 
@@ -430,9 +430,9 @@ export default class Nestable extends Emitter {
     }
 
     /**
-    * Get event
-    * @return {Object}
-    */
+     * Get event
+     * @return {Object}
+     */
     _getEvent(e) {
         if (this.touch) {
             if (e.type === "touchend") {
@@ -479,8 +479,14 @@ export default class Nestable extends Emitter {
                 original: {
                     x: evt.pageX,
                     y: evt.pageY,
-                }
+                },
             };
+
+            this.hierarchy = {
+                movedNode: item,
+                originalParent: item.parentNode,
+                originalParentItem: item.parentNode.closest(`.${this.config.classes.item}`)
+            }
 
             this.active = {
                 maxDepth: false,
@@ -776,6 +782,8 @@ export default class Nestable extends Emitter {
             this.container.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
 
             this.lastParent = this.placeholder.parentNode;
+            this.hierarchy.newParent = this.lastParent;
+            this.hierarchy.newParentItem = this.lastParent.closest(`.${this.config.classes.item}`);
 
             this.emit("move", this.active);
         }
@@ -906,10 +914,13 @@ export default class Nestable extends Emitter {
             this._getData();
 
             if (this.newParent) {
+                this.hierarchy.newInstance = this.newParent._nestable;
                 this.newParent._nestable._getData();
             }
 
-            this.emit("stop", this.data);
+            this.hierarchy.hierarchy = this.data
+
+            this.emit("stop", this.hierarchy);
 
             this.update();
         }
