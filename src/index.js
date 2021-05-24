@@ -408,10 +408,18 @@ export default class Nestable extends Emitter {
         }
     }
 
-    _isDisabled(item) {
+    _isDisabled(item, type = "disabled") {
+
+        if (item === null) {
+            return false;
+        }
+
         // item has the [data-nestable-disabled] attribute
         if ("nestableDisabled" in item.dataset) {
-            if (!item.dataset.nestableDisabled.length || item.dataset.nestableDisabled !== "false") {
+            if (type === "disabled" && (!item.dataset.nestableDisabled.length || item.dataset.nestableDisabled === "disabled") ||
+                type === "dragging" && item.dataset.nestableDisabled === "dragging" ||
+                type === "nesting" && item.dataset.nestableDisabled === "nesting"
+            ) {
                 return true;
             }
         }
@@ -461,7 +469,7 @@ export default class Nestable extends Emitter {
         }
 
         if (item) {
-            if (this._isDisabled(item)) {
+            if (this._isDisabled(item) || this._isDisabled(item.parentNode.closest(`.${this.config.classes.item}`)) || this._isDisabled(item, "dragging")) {
                 return false;
             }
 
@@ -609,33 +617,42 @@ export default class Nestable extends Emitter {
                             }
                         } else {
                             const disabled = this._isDisabled(prevEl);
+                            const cantNest = this._isDisabled(prevEl, "nesting");
 
                             if (!disabled) {
                                 const depth = DOM.parents(this.placeholder, this.config.nodes.list).length;
                                 let allowNesting = depth + this.dragDepth <= this.config.maxDepth;
                                 let parentEl = prevEl.querySelector(this.config.nodes.list);
 
-                                if (allowNesting) {
-                                    this.active.maxDepth = false;
-                                    const oldParent = this.placeholder.closest(`.${this.config.classes.list}`);
+                                if (cantNest) {
+                                    if (!this.active.nestDisabled) {
+                                        this.emit("error.nesting.disabled", this.active.node, this.config.maxDepth);
 
-                                    if (!parentEl) {
-                                        parentEl = this._makeParent(prevEl);
+                                        this.active.nestDisabled = true;
                                     }
-
-                                    this._moveElement(this.placeholder, {
-                                        parent: parentEl,
-                                        type: "appendChild",
-                                    });
-
-                                    this.emit("nest", parentEl, oldParent);
-
-                                    this.origin.x = e.pageX;
                                 } else {
-                                    if (!this.active.maxDepth) {
-                                        this.emit("error.maxdepth", this.active.node, this.config.maxDepth);
+                                    if (allowNesting) {
+                                        this.active.maxDepth = false;
+                                        const oldParent = this.placeholder.closest(`.${this.config.classes.list}`);
 
-                                        this.active.maxDepth = true;
+                                        if (!parentEl) {
+                                            parentEl = this._makeParent(prevEl);
+                                        }
+
+                                        this._moveElement(this.placeholder, {
+                                            parent: parentEl,
+                                            type: "appendChild",
+                                        });
+
+                                        this.emit("nest", parentEl, oldParent);
+
+                                        this.origin.x = e.pageX;
+                                    } else {
+                                        if (!this.active.maxDepth) {
+                                            this.emit("error.maxdepth", this.active.node, this.config.maxDepth);
+
+                                            this.active.maxDepth = true;
+                                        }
                                     }
                                 }
                             } else {
@@ -651,6 +668,7 @@ export default class Nestable extends Emitter {
                 } else if (this.last.dirX < 0 && x < -this.config.threshold) { // moving left
 
                     this.active.maxDepth = false;
+                    this.active.nestDisabled = false;
                     this.active.disabledParent = false;
                     this.active.collapsedParent = false;
                     // this.active.confinedParent = false;
