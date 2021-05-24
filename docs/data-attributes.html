@@ -100,28 +100,30 @@
 
 <pre><code class="javascript language-markup">&lt;ol&gt;
     &lt;li&gt;Item 1&lt;/li&gt;
-    &lt;li id="item2"&gt;Item 2
+    &lt;li data-nestable-axis="x"&gt;Item 2&lt;/li&gt;
+    &lt;li data-nestable-axis="y"&gt;Item 3&lt;/li&gt;
+    &lt;li&gt;Item 4&lt;/li&gt;
+    &lt;li id="parent1"&gt;Item 5
         &lt;ol&gt;
-            &lt;li data-nestable-parent="item2"&gt;Item 3&lt;/li&gt;
-            &lt;li data-nestable-parent="item2"&gt;Item 4
+            &lt;li data-nestable-parent="parent1"&gt;Item 6&lt;/li&gt;
+            &lt;li data-nestable-parent="parent1"&gt;Item 7
                 &lt;ol&gt;
-                    &lt;li data-nestable-parent="item2"&gt;Item 5&lt;/li&gt;
-                    &lt;li data-nestable-parent="item2"&gt;Item 6&lt;/li&gt;
+                    &lt;li&gt;Item 8&lt;/li&gt;
+                    &lt;li&gt;Item 9&lt;/li&gt;
                 &lt;/ol&gt;					
             &lt;/li&gt;
         &lt;/ol&gt;
     &lt;/li&gt;
-    &lt;li data-nestable-axis="x"&gt;Item 7&lt;/li&gt;
-    &lt;li&gt;Item 8&lt;/li&gt;
-    &lt;li&gt;Item 9
-        &lt;ol&gt;
-            &lt;li&gt;Item 10&lt;/li&gt;
-            &lt;li&gt;Item 11&lt;/li&gt;
-        &lt;/ol&gt;
-    &lt;/li&gt;
-    &lt;li data-nestable-axis="y"&gt;Item 12&lt;/li&gt;
+    &lt;li data-nestable-disabled="nesting"&gt;Item 10&lt;/li&gt;
+    &lt;li&gt;Item 11&lt;/li&gt;
+    &lt;li data-nestable-disabled="dragging"&gt;Item 12&lt;/li&gt;
     &lt;li&gt;Item 13&lt;/li&gt;
-    &lt;li data-nestable-disabled&gt;Item 14&lt;/li&gt;
+    &lt;li data-nestable-disabled="disabled"&gt;
+        Item 14
+        &lt;ol&gt;
+            &lt;li&gt;Item 15&lt;/li&gt;
+        &lt;/ol&gt;					
+    &lt;/li&gt;
 &lt;/ol&gt;</code></pre>
 
 
@@ -146,8 +148,8 @@
         </tr>
         <tr>
             <td><a href="api/data-attributes/disabled.html"><code>[data-nestable-disabled]</code></a></td>
-            <td><code></code></td>
-            <td>Disables the item preventing dragging and nesting within it. The value can be omitted or a <code>boolean</code> can be used. Same as adding the <code>.nst-disabled</code> className to the item.</td>
+            <td><code>"disabled"</code>, <code>"dragging"</code> or <code>"nesting"</code></td>
+            <td>Set to "dragging" to prevent dragging of the item, but still allow items to be nested within it. Set to "nesting" to prevent nesting items within it, but still allow dragging. Setting to "disabled" completely disables the item, i.e. it cannot be dragged / reordered / nested and cannot have items nested / dropped in it.</td>
         </tr>                
         <tr>
             <td><a href="api/data-attributes/parent.html"><code>[data-nestable-parent]</code></a></td>
@@ -162,29 +164,31 @@
 <div id="container-demo">
     <p>
         <ol id="myList" class="list">
-            <li><span class="content">Item 1</span></li>
-            <li id="item2"><span class="content">Item 2</span>
+            <li data-id="1" class="item">Item 1</li>
+            <li data-id="2" data-nestable-axis="x" class="item">Item 2 <span class="label">data-nestable-axis="x"</span></li>
+            <li data-id="3" data-nestable-axis="y" class="item">Item 3 <span class="label">data-nestable-axis="y"</span></li>
+            <li data-id="4" class="item">Item 4</li>
+            <li data-id="5" class="item" id="parent1">Item 5 <span class="label">#parent1</span>
                 <ol>
-                    <li data-nestable-parent="item2"><span class="content">Item 3</span> <span class="label">data-nestable-parent="item2"</span></li>
-                    <li data-nestable-parent="item2"><span class="content">Item 4</span> <span class="label">data-nestable-parent="item2"</span>
+                    <li data-id="6" data-nestable-parent="parent1" class="item">Item 6 <span class="label">data-nestable-parent="parent1"</span></li>
+                    <li data-id="7" data-nestable-parent="parent1" class="item">Item 7 <span class="label">data-nestable-parent="parent1"</span>
                         <ol>
-                            <li data-nestable-parent="item2"><span class="content">Item 5</span> <span class="label">data-nestable-parent="item2"</span></li>
-                            <li data-nestable-parent="item2"><span class="content">Item 6</span> <span class="label">data-nestable-parent="item2"</span></li>
+                            <li data-id="8" class="item">Item 8</li>
+                            <li data-id="9" class="item">Item 9</li>
                         </ol>					
                     </li>
                 </ol>
             </li>
-            <li data-nestable-axis="x"><span class="content">Item 7</span> <span class="label">data-nestable-axis="x"</span></li>
-            <li><span class="content">Item 8</span></li>
-            <li><span class="content">Item 9</span>
+            <li data-id="10" class="item" data-nestable-disabled="nesting">Item 10 <span class="label">data-nestable-disabled="nesting"</span></li>
+            <li data-id="11" class="item">Item 11</li>
+            <li data-id="12" class="item" data-nestable-disabled="dragging">Item 12 <span class="label">data-nestable-disabled="dragging"</span></li>
+            <li data-id="13" class="item">Item 13</li>
+            <li data-id="14" class="item" data-nestable-disabled="disabled">
+                Item 14  <span class="label">data-nestable-disabled="disabled"</span>
                 <ol>
-                    <li><span class="content">Item 10</span></li>
-                    <li><span class="content">Item 11</span></li>
-                </ol>
+                    <li data-id="15" class="item">Item 15</li>
+                </ol>					
             </li>
-            <li data-nestable-axis="y"><span class="content">Item 12</span> <span class="label">data-nestable-axis="y"</span></li>
-            <li><span class="content">Item 13</span></li>
-            <li data-nestable-disabled><span class="content">Item 14</span> <span class="label">data-nestable-disabled</span></li>
         </ol>
 
     </p>   
@@ -196,8 +200,8 @@
                             </div>
                             <!--  /.End of documentation text content -->
                             <div class="footer-btn d-flex justify-content-between">
-                                <a href="recalculate.html" class="btn"><i class="fas fa-arrow-circle-left"></i>Previous</a>
-                                <a href="off.html" class="btn">Next<i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="options.html" class="btn"><i class="fas fa-arrow-circle-left"></i>Previous</a>
+                                <a href="public-methods.html" class="btn">Next<i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                             <!-- /.End of footer button -->
                         </div>
