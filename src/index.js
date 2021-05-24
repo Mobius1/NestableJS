@@ -469,7 +469,13 @@ export default class Nestable extends Emitter {
         }
 
         if (item) {
-            if (this._isDisabled(item) || this._isDisabled(item.parentNode.closest(`.${this.config.classes.item}`)) || this._isDisabled(item, "dragging")) {
+            if (this._isDisabled(item) || this._isDisabled(item.parentNode.closest(`.${this.config.classes.item}`))) {
+                return false;
+            }
+
+            if (this._isDisabled(item, "dragging")) {
+                this.emit("error.dragging.disabled", item);
+
                 return false;
             }
 
@@ -626,7 +632,7 @@ export default class Nestable extends Emitter {
 
                                 if (cantNest) {
                                     if (!this.active.nestDisabled) {
-                                        this.emit("error.nesting.disabled", this.active.node, this.config.maxDepth);
+                                        this.emit("error.nesting.disabled", this.active.node);
 
                                         this.active.nestDisabled = true;
                                     }
