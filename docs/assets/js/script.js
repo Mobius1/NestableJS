@@ -160,10 +160,14 @@ function init() {
                                             <li><a href="https://mobius1.github.io/NestableJS/api/events/nest.html">nest</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/events/unnest.html">unnest</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/events/reorder.html">reorder</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/list.collapse.html">list.collapse</a></li>                                            
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/list.expand.html">list.expand</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/events/error.maxdepth.html">error.maxdepth</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/events/error.disabled.html">error.disabled</a></li>
                                             <li><a href="https://mobius1.github.io/NestableJS/api/events/error.collapsed.html">error.collapsed</a></li>
-                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/error.confined.html">error.confined</a></li>`;
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/error.confined.html">error.confined</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/error.nesting.disabled.html">error.nesting.disabled</a></li>
+                                            <li><a href="https://mobius1.github.io/NestableJS/api/events/error.dragging.disabled.html">error.dragging.disabled</a></li>`;
 
     demosMenu.lastElementChild.innerHTML = ``;
 
@@ -201,13 +205,6 @@ function init() {
             item.classList.toggle("active", match);
         });
     }
-
-    // if ( window.Selectable && typeof Selectable === "function" ) {
-    //     demo1();
-    //     demo2();
-    //     demo3();
-    //     demo4();
-    // }
 }
 
 function initSidebar() {
@@ -299,98 +296,6 @@ function createNavLinks() {
             stickyNav.classList.remove('docked');
         }
     }
-}
-
-
-if ( window.Selectable && typeof Selectable === "function" ) {
-
-    const container1 = document.getElementById("demo-container");
-    const container2 = document.getElementById("demo-container-2");
-    const container3 = document.getElementById("demo-container-3");
-    const container4 = document.querySelector(".desktop");
-    let selectable1;
-    let selectable2;
-    let selectable3;
-    let selectable4;
-
-    function demo1() {
-        if ( container1 ) {
-
-            selectable1 = new Selectable({
-                filter: ".btn-selectable",
-                appendTo: container1,
-                lasso: {
-                    borderColor: "#fff"
-                }
-            });
-
-            const frag = document.createDocumentFragment();
-
-            for (let i = 0; i < 36; i++ ) {
-                const button = document.createElement("button");
-                button.type = "button";
-                button.className = "btn btn-secondary mr-2 mb-2 btn-selectable";   
-                button.textContent = i+1;         
-                frag.appendChild(button);
-            }
-
-            container1.appendChild(frag);
-
-            selectable1.add(container1.children);
-        }
-    }
-
-    function demo2() {
-        if ( container2 ) {
-            selectable2 = new Selectable({
-                appendTo: container2,
-                lasso: {
-                    borderColor: "#fff",
-                    backgroundColor: "rgba(255,255,255,0.2)"
-                }            
-            });
-
-            const frag = document.createDocumentFragment();
-
-            for (let i = 0; i < 9; i++ ) {
-                const div = document.createElement("div");
-                div.className = "ui-thumbnail";
-                div.innerHTML = `<img src="assets/img/avatar-${i+1}.png" alt="..." class="img-thumbnail">`;
-                frag.appendChild(div);
-            }
-
-            container2.appendChild(frag);
-
-            selectable2.add(container2.children);
-        }
-    }
-
-    function demo3() {
-        if ( container3 ) {
-            selectable3 = new Selectable({
-                lassoSelect: "sequential",
-                appendTo: "#calendar",
-                filter: ".day",
-                lasso: {
-                    border: "2px dashed rgba(255, 255, 255, 0)",
-                    backgroundColor: "rgba(255, 255, 255, 0)"
-                },
-            });
-        }    
-    }
-
-    function demo4() {
-        if ( container4 ) {
-            selectable4 = new Selectable({
-              filter: ".icon-desktop",
-              appendTo: container4,
-              lasso: {
-                border: "1px solid rgba(51, 153, 255, 1)",
-                backgroundColor: "rgba(51, 153, 255, 0.2)"
-              },
-            });
-        }    
-    }    
 }
 
 function initSearch() {
