@@ -438,7 +438,7 @@ export default class Nestable extends Emitter {
     }
 
     /**
-     * Get event
+     * Get mouse / touch event
      * @return {Object}
      */
     _getEvent(e) {
@@ -823,7 +823,7 @@ export default class Nestable extends Emitter {
         let ipos = false;
 
         // prevent moving if item has disabled parents
-        if (this._isDisabled(type.parent)) {
+        if (this._isDisabled(type.parent) || this._isDisabled(type.parent.closest(`.${this.config.classes.item}`))) {
             return false;
         }
 
@@ -965,6 +965,8 @@ export default class Nestable extends Emitter {
 
         btn.textContent = this.config.expandButtonContent;
         item.classList.add(this.config.classes.collapsed);
+
+        this.emit("list.collapse", item);
     }
 
     _expandList(item, btn) {
@@ -974,6 +976,8 @@ export default class Nestable extends Emitter {
 
         btn.textContent = this.config.collapseButtonContent;
         item.classList.remove(this.config.classes.collapsed);
+
+        this.emit("list.expand", item);
     }
 
     _makeParent(el) {
